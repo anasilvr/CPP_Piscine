@@ -12,7 +12,7 @@ all:	$(NAME)
 
 $(NAME):	$(OBJS)
 			$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-			@echo "\n\033[32m\033[1mYour new phonebook is ready!\n\033[0m"
+			@echo "\n\033[32m\033[1mGBU ready!\n\033[0m"
 
 clean:
 			rm -f $(OBJS)

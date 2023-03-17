@@ -17,6 +17,7 @@ $(NAME):	$(OBJS)
 
 clean:
 			rm -f $(OBJS)
+			rm -f main.o
 
 fclean: 	clean
 			@rm -f $(NAME)
