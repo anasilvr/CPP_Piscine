@@ -1,22 +1,21 @@
-NAME	= Account
-SRCS 	= Account.cpp tests.cpp
-INC		= include
-OBJS 	= $(SRCS:.cpp=.o)
+NAME	= sayHi
+
+SRCS 	= $(addprefix src/, main.cpp)
+OBJS 	= $(SRCS:%.cpp=%.o)
 
 CC 		= c++
-CFLAGS 	= -Wall -Wextra -Werror -std=c++98 -I$(INC)
+CFLAGS 	= -Wall -Wextra -Werror -std=c++98
 
 #----------RULES----------#
+
+all:	$(NAME)
 
 .cpp.o:
 			$(CC) $(CFLAGS) -c $< -o $(<:.cpp=.o)
 
-all:		$(NAME)
-
 $(NAME):	$(OBJS)
 			$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-			@echo "\n\033[32m\033[1mCompiled!\n\033[0m"
-
+			@echo "\n\033[32m\033[1mBe nice, say hi!\n\033[0m"
 clean:
 			rm -f $(OBJS)
 
@@ -26,4 +25,4 @@ fclean: 	clean
 
 re:			fclean all
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re
