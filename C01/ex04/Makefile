@@ -1,7 +1,6 @@
 NAME	= sed
 
-HEADER	= $(addprefix include/, sed.hpp)
-SRCS 	= $(addprefix src/, main.cpp sed.cpp )
+SRCS 	= $(addprefix src/, main.cpp )
 OBJS 	= $(SRCS:%.cpp=%.o)
 
 CC 		= c++
@@ -16,7 +15,8 @@ all:	$(NAME)
 
 $(NAME):	$(OBJS)
 			$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-			@echo "\n\033[32m\033[1mSed is ready to change your files!\n\033[0m"
+			@echo "\n\033[32m\033[1m./Sed is ready to change your files!\033[0m"
+			@echo "\033[1musage:\033[0m ./sed [filename] [word_to_search] [replacing_word]"
 clean:
 			rm -f $(OBJS)
 
