@@ -26,31 +26,37 @@ int main( int argc, char **argv )
 		return (errMsg("error: invalid number of arguments.\n", "usage: ./sed [filename] [word_to_search] [replacing_word]"));
 
 	std::ifstream	ifile (argv[1]);
-	std::string		name(argv[1]);
-	std::string		wtarget(argv[2]);
-	std::string		wreplace(argv[3]);
-
-	name += ".replace";
 
 	if (!ifile.good())
 		return (errMsg("error: could not open file ", argv[1]));
 	else
 	{
-		std::ofstream ofile(name);
-		std::string line;
-		while (std::getline(ifile, line))
+		std::string			name(argv[1]);
+		std::string			wtarget(argv[2]);
+		std::string			wreplace(argv[3]);
+		std::string			line;
+		std::stringstream	buffer;
+		std::size_t			pos = 0;
+
+		std::ofstream		ofile(name.append(".replace").data());
+
+		while (ifile.good() && ofile.good())
 		{
-			std::size_t pos = 0;
-			while (pos < line.length())
+			std::getline(ifile, line);
+			pos = line.find(wtarget, 0);
+			while (pos != std::string::npos)
 			{
-				pos = line.find(wtarget, pos);
-				if (pos == std::string::npos)
-					break ;
-				line.erase(pos, line.length());
+				line.erase(pos, wtarget.length());
 				line.insert(pos, wreplace);
+				pos = line.find(wtarget, pos);
 			}
-			ofile << line << std::endl;
+			ofile << line;
+			if (ifile.eof())
+				break ;
+			ofile << std::endl;
 		}
+		ifile.close();
+		ofile.close();
 	}
 }
 
