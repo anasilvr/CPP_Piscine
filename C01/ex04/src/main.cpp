@@ -12,14 +12,6 @@ static int errMsg (std::string msg, std::string data)
 	return (-1);
 }
 
-// static void word_replace (std::string *target, size_t len, std::string word)
-// {
-// 	(void)word;
-// 	std::cout << "len: "<< len << std::endl;
-// 	std::cout << *target << std::endl;
-		
-// }
-
 int main( int argc, char **argv )
 {
 	if (argc != 4)
