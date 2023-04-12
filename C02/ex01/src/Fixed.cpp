@@ -15,15 +15,18 @@ Fixed::Fixed(const Fixed& copy)
 
 Fixed::Fixed(const int nb)
 {
+//	int sign;
 	std::cout << "Int constructor called" << std::endl;
 	this->_fixedNb = nb << this->_fraction;
+	// sign = this->_fixedNb << this->_sign;
+	// std::cout << "sign = " << sign << std::endl;
 	return ;
 }
 
 Fixed::Fixed(const float nb)
 {
 	std::cout << "Float constructor called" << std::endl;
-	this->_fixedNb = roundf(nb * (1<< this->_fraction));
+	this->_fixedNb = roundf(nb * (1 << this->_fraction));
 	return ;
 }
 
@@ -60,6 +63,7 @@ Fixed& Fixed::operator=(Fixed const &rhs)
 }
 
 const int Fixed::_fraction = 8;
+//const int Fixed::_sign = 4;
 
 std::ostream& operator<<(std::ostream& out, Fixed const& arg)
 {

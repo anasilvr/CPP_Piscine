@@ -11,7 +11,7 @@ class Fixed {
 		Fixed	(const float nb);
 		~Fixed	( void );					// Destructor
 
-	//Getters
+		//Getter/Setter
 		int		getRawBits( void ) const;
 		void	setRawBits( int const raw );
 	
