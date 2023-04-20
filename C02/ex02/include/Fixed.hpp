@@ -18,13 +18,13 @@ class Fixed {
 		float	toFloat( void ) const;
 		int		toInt( void ) const;
 
-		static Fixed& 	min (Fixed& a, Fixed& b);
-		static const Fixed& 	min (Fixed const& a, Fixed const& b);
-		static Fixed& 	max (Fixed& a, Fixed& b);
-		static const Fixed& 	max (Fixed const& a, Fixed const& b);
+		static			Fixed& 	min (Fixed& a, Fixed& b);
+		static const	Fixed& 	min (Fixed const& a, Fixed const& b);
+		static			Fixed& 	max (Fixed& a, Fixed& b);
+		static const	Fixed& 	max (Fixed const& a, Fixed const& b);
 
 		// Operator overloads
-		Fixed& operator=(Fixed const &rhs);
+		Fixed& operator=(Fixed const &rhs); // Assignement (or Copy) operator
 
 		//Comparison operators
 		bool operator>(Fixed const &rhs);
@@ -49,8 +49,8 @@ class Fixed {
 
 
 	private:
-		int		_fixedNb;
-		static int const _fraction;
+		int					_fixedNb;
+		static int const	_fraction;
 };
 
 std::ostream& operator<<(std::ostream& out, Fixed const& arg);
