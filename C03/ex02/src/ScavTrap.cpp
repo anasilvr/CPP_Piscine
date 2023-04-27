@@ -64,7 +64,7 @@ void	ScavTrap::guardGate(){
 	std::cout << BWHT;
 	if (this->_gateKeeper == false){
 		this->_gateKeeper = true;
-		std::cout << BWHT << this->_name << " enters guard mode.";
+		std::cout << BWHT << "ScavTrap " << this->_name << " enters guard mode.";
 	}
 	else {
 		this->_gateKeeper = false;
@@ -78,11 +78,14 @@ bool	ScavTrap::guardStatus() const {
 }
 
 std::ostream& operator<<(std::ostream& out, ScavTrap const& arg){
-	out << MAG <<"ScavTrap " << arg.getName() << "\t[ " << "HP: " << arg.getHealth() << " | ENERGY: " << arg.getEnergy() << std::flush;
+	out << MAG <<"ScavTrap " << arg.getName();
+	out << "\t[ " << "HP: " << arg.getHealth();
+	out << " | ENERGY: " << arg.getEnergy();
+	out << " | AD: " << arg.getAttackDmg(); 
 	if (arg.guardStatus() == true)
 		out << " | GUARD: \033[0;32mON\e[0;35m ]";
 	else
 		out << " | GUARD: \033[0;31mOFF\e[0;35m ]";
-	out << RESET << std::endl;
+	out << RESET << std::flush;
 	return (out);
 }

@@ -39,6 +39,10 @@ ClapTrap::~ClapTrap() {
 	return;
 }
 
+void	ClapTrap::setName(const std::string& n){
+	this->_name = n;
+}
+
 void	ClapTrap::setHealth(const int& amount){
 	if (amount < 0)
 		this->_hitPts = 0;
@@ -63,6 +67,10 @@ unsigned int ClapTrap::getHealth() const{
 
 unsigned int ClapTrap::getEnergy() const{
 	return (this->_energyPts);
+}
+
+unsigned int ClapTrap::getAttackDmg() const{
+	return (this->_attackDmg);
 }
 
 void ClapTrap::attack(const std::string& target){
@@ -122,7 +130,9 @@ void ClapTrap::beRepaired(unsigned int amount){
 }
 
 std::ostream& operator<<(std::ostream& out, ClapTrap const& arg){
-	out << YEL << "ClapTrap "<< arg.getName() << "\t[ " << "HP: " << arg.getHealth();
-	out << " | ENERGY: " << arg.getEnergy() << " ]" << RESET << std::flush;
+	out << YEL << "ClapTrap "<< arg.getName();
+	out << "\t[ " << "HP:" << arg.getHealth();
+	out << "\t| ENERGY: " << arg.getEnergy();
+	out << "| AD: " << arg.getAttackDmg() << " ]" << RESET << std::flush;
 	return (out);
 }

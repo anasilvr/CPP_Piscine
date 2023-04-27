@@ -1,8 +1,7 @@
 #pragma once
-#include <string>
 
-#ifndef CLAPTRAP_HPP_
-#define CLAPTRAP_HPP_
+#include <string>
+#include <iostream>
 
 # define BLK "\e[0;30m"
 # define RED "\e[0;31m"
@@ -39,8 +38,9 @@ class ClapTrap {
 		std::string		getName() const;
 		unsigned int	getHealth() const;
 		unsigned int	getEnergy() const;
+		unsigned int	getAttackDmg() const;
 
-		virtual void	attack(const std::string& target);
+		virtual void 	attack(const std::string& target);
 		void 			takeDamage(unsigned int amount);
 		void 			beRepaired(unsigned int amount);
 
@@ -54,5 +54,3 @@ class ClapTrap {
 };
 
 std::ostream& operator<<(std::ostream& out, ClapTrap const& arg);
-
-#endif // CLAPTRAP_HPP_

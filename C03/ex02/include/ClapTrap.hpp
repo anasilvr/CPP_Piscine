@@ -31,7 +31,7 @@ class ClapTrap {
 
 		ClapTrap &operator=(const ClapTrap &rhs);
 
-		~ClapTrap();
+		virtual ~ClapTrap();
 
 		void			setName(const std::string& n);
 		void			setHealth(const int& amount);
@@ -39,8 +39,9 @@ class ClapTrap {
 		std::string		getName() const;
 		unsigned int	getHealth() const;
 		unsigned int	getEnergy() const;
+		unsigned int	getAttackDmg() const;
 
-		virtual void	attack(const std::string& target);
+		virtual void 	attack(const std::string& target);
 		void 			takeDamage(unsigned int amount);
 		void 			beRepaired(unsigned int amount);
 

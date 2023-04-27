@@ -3,7 +3,7 @@
 
 class HumanA {
 	public:
-	HumanA	( std::string name, Weapon &Weapon );
+	HumanA	( std::string name, Weapon& Weapon );
 	~HumanA ( void );
 
 	void	setWeapon( Weapon& weapon);
