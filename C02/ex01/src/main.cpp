@@ -22,7 +22,7 @@ int main( void )
 	Fixed const b( 10 );
 	Fixed const c( 42.42f );
 	Fixed const d( b );
-//	Fixed const e( -10 );
+	Fixed const e( -10 );
 
 	a = Fixed( 1234.4321f );
 	
@@ -47,8 +47,8 @@ int main( void )
 //	std::cout << "Binary = " << toBinary(d.getRawBits()) << std::endl;
 	std::cout << "d is " << d.toInt() << " as integer" << std::endl;
 
-//	std::cout << "e._fixedNb = " << e.getRawBits() << std::endl;
-//	std::cout << "Binary = " << toBinary(e.getRawBits()) << std::endl;
-//	std::cout << "e is " << e.toInt() << " as integer" << std::endl;
+	// std::cout << "e._fixedNb = " << e.getRawBits() << std::endl;
+	// std::cout << "Binary = " << toBinary(e.getRawBits()) << std::endl;
+	std::cout << "e is " << e.toInt() << " as integer" << std::endl;
 	return 0;
 }

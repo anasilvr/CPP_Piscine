@@ -3,17 +3,13 @@
 Harl::Harl( void ) { return; }
 Harl::~Harl( void ) { return; }
 
-void Harl::debug( void )
-{ std::cout << DEBUG_MSG << std::endl; }
+void Harl::debug( void ) { std::cout << DEBUG_MSG << std::endl; }
 
-void Harl::info( void )
-{ std::cout << INFO_MSG << std::endl; }
+void Harl::info( void ) { std::cout << INFO_MSG << std::endl; }
 
-void Harl::warning( void )
-{ std::cout << WARN_MSG << std::endl; }
+void Harl::warning( void ) { std::cout << WARN_MSG << std::endl; }
 
-void Harl::error( void )
-{ std::cout << ERROR_MSG << std::endl; }
+void Harl::error( void ) { std::cout << ERROR_MSG << std::endl; }
 
 void Harl::complain( std::string id )
 {

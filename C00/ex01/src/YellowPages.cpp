@@ -26,6 +26,7 @@ void	Phonebook::addContact(void)
 	setContact();
 	this->_index++;
 	std::cout << "\e[1m[ Contact added to your phonebook ]\e[0m\n" << std::endl;
+
 }
 
 /*• SEARCH : affiche le contact demandé
@@ -62,15 +63,21 @@ void	Phonebook::searchContact(void) const
 		std::cin >> nb;
 		if (std::cin.eof())
 			break ;
-		input = atoi(nb.c_str());
+		try {
+			input = stoi(nb);
+		}
+		catch (...)
+		{
+			std::cout << "Index should be a number." << std::endl;
+		}
 		if (input > 0 && input < 8 && input <= this->getIndex())
 		{
 			std::cout << "\t\nFound it! Here's your contact information:\n" << std::endl;
 			this->printContact(this->_contact[input - 1]);
 			break ;
 		}
-		else if (input != -1)
-			std::cout << "Invalid index. Try again or type -1 to return to the main menu.\n" << std::endl;
+		if (input != -1)
+			std::cout << "Try again or type -1 to return to the main menu.\n" << std::endl;
 	}
 	std::cout << "\t\nReturning to the the main menu.\n" << std::endl;
 }

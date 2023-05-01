@@ -79,5 +79,3 @@ int main ()
  	cout << REDHB << "\n#_____LEAKS REPORT____#" << RESET << endl;
 	return (0);
 }
-
-std::string[100]

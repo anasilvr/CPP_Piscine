@@ -39,37 +39,37 @@ ClapTrap::~ClapTrap() {
 	return;
 }
 
-void	ClapTrap::setName(const std::string& n){
+void	ClapTrap::setName(const std::string& n) {
 	this->_name = n;
 }
 
-void	ClapTrap::setHealth(const int& amount){
+void	ClapTrap::setHealth(const int& amount) {
 	if (amount < 0)
 		this->_hitPts = 0;
 	else
 		this->_hitPts = amount;
 }
 
-void	ClapTrap::setEnergy(const int& amount){
+void	ClapTrap::setEnergy(const int& amount) {
 	if (amount < 0)
 		this->_energyPts = 0;
 	else
 		this->_energyPts = amount;
 }
 
-std::string ClapTrap::getName() const{
+std::string ClapTrap::getName() const {
 	return (this->_name);
 }
 
-unsigned int ClapTrap::getHealth() const{
+unsigned int ClapTrap::getHealth() const {
 	return (this->_hitPts);
 }
 
-unsigned int ClapTrap::getEnergy() const{
+unsigned int ClapTrap::getEnergy() const {
 	return (this->_energyPts);
 }
 
-void ClapTrap::attack(const std::string& target){
+void ClapTrap::attack(const std::string& target) {
 	if (this->_energyPts >= 1) {
 		this->_energyPts -= 1;
 		std::cout << BYEL << "ClapTrap " << this->_name << " attacks " << target;
@@ -81,7 +81,7 @@ void ClapTrap::attack(const std::string& target){
 	return;
 }
 
-void ClapTrap::takeDamage(unsigned int amount){
+void ClapTrap::takeDamage(unsigned int amount) {
 	if ((int)amount < 0)
 	{
 		std::cout << RED << "[Damage] Invalid input. Try again" << RESET << std::endl;
@@ -104,7 +104,7 @@ void ClapTrap::takeDamage(unsigned int amount){
 	return;
 }
 
-void ClapTrap::beRepaired(unsigned int amount){
+void ClapTrap::beRepaired(unsigned int amount) {
 	if ((int)amount < 0)
 	{
 		std::cout << RED << "[Repair] Invalid input. Try again" << RESET << std::endl;
@@ -125,7 +125,9 @@ void ClapTrap::beRepaired(unsigned int amount){
 	return;
 }
 
-std::ostream& operator<<(std::ostream& out, ClapTrap const& arg){
-	out << YEL << "ClapTrap "<< arg.getName() << "\t[ " << "HP: " << arg.getHealth() << " | ENERGY: " << arg.getEnergy() << " ]" << RESET << std::flush;
+std::ostream& operator<<(std::ostream& out, ClapTrap const& arg) {
+	out << YEL << "ClapTrap "<< arg.getName() << "\t[ " << "HP: ";
+	out << arg.getHealth() << " | ENERGY: " << arg.getEnergy();
+	out << " ]" << RESET << std::flush;
 	return (out);
 }

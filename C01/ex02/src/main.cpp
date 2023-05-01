@@ -6,6 +6,7 @@ int main ( void )
 	std::string salut = "HI THIS IS BRAIN";
 	std::string* stringPTR = &salut;
 	std::string& stringREF = salut;
+//	std::string& invalid_ref;
 
 	std::cout << "[salut]     Address:\t" << &salut << std::endl;
 	std::cout << "[stringPRT] Address:\t" << stringPTR << std::endl;

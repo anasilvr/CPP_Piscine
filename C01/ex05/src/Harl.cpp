@@ -3,17 +3,13 @@
 Harl::Harl( void ) { return; }
 Harl::~Harl( void ) { return; }
 
-void Harl::debug( void )
-{ std::cout << DEBUG_MSG << std::endl; }
+void Harl::debug( void ) { std::cout << DEBUG_MSG << std::endl; }
 
-void Harl::info( void )
-{ std::cout << INFO_MSG << std::endl; }
+void Harl::info( void ) { std::cout << INFO_MSG << std::endl; }
 
-void Harl::warning( void )
-{ std::cout << WARN_MSG << std::endl; }
+void Harl::warning( void ) { std::cout << WARN_MSG << std::endl; }
 
-void Harl::error( void )
-{ std::cout << ERROR_MSG << std::endl; }
+void Harl::error( void ) { std::cout << ERROR_MSG << std::endl; }
 
 void Harl::complain( std::string id )
 {
@@ -33,7 +29,7 @@ void Harl::complain( std::string id )
 	for (int i = 0; i < 5; i++)
 	{
 		if (i == 4)
-			std::cout << "LEARN TO READ AND CHOOSE A VALID OPTION!" << std::endl;
+			std::cout << "LEARN TO READ AND CHOOSE A VALID OPTION!\n" << std::endl;
 		if (!id.compare(options[i]))
 		{
 			(this->*lvl[i])();

@@ -78,7 +78,8 @@ bool	ScavTrap::guardStatus() const {
 }
 
 std::ostream& operator<<(std::ostream& out, ScavTrap const& arg){
-	out << MAG <<"ScavTrap " << arg.getName() << "\t[ " << "HP: " << arg.getHealth() << " | ENERGY: " << arg.getEnergy() << std::flush;
+	out << MAG <<"ScavTrap " << arg.getName() << "\t[ " << "HP: ";
+	out <<arg.getHealth() << " | ENERGY: " << arg.getEnergy() << std::flush;
 	if (arg.guardStatus() == true)
 		out << " | GUARD: \033[0;32mON\e[0;35m ]";
 	else

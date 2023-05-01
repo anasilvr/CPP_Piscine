@@ -8,7 +8,7 @@ class Fixed {
 		Fixed	(const Fixed& copy);		// Copy Constructor
 		~Fixed	( void );					// Destructor
 
-	//Getters
+		//Getters
 		int		getRawBits( void ) const;
 		void	setRawBits( int const raw );
 	
