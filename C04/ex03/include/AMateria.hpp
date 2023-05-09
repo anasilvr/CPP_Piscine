@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include "../include/Brain.hpp"
+#include "../include/Character.hpp"
 
 # define BLK "\e[0;30m"
 # define RED "\e[0;31m"
@@ -25,20 +25,21 @@ using std::string;
 using std::cout;
 using std::endl;
 
-class Animal
-{
-protected:
-	string _type;	
+class ICharacter;
 
-public:
-	Animal();
-	Animal(const string t);
-	Animal(const Animal &other);
-	Animal &operator=(const Animal &rhs);
-	virtual	~Animal();
+// Class declaration
+class AMateria {
+	public:
+		AMateria(std::string const & type);
+		AMateria(const AMateria &other);
+		virtual ~AMateria();
+		
+		std::string const& getType() const; //Returns the materia type
+		
+		virtual AMateria* clone() const = 0;
+		virtual void use(ICharacter& target);
 
-	string	getType() const;
-	void	setType(const string& t);
-
-	virtual void makeSound() const; 
+		AMateria& operator=(const AMateria &rhs);
+	protected:
+		std::string _type;
 };

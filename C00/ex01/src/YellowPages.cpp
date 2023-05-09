@@ -70,7 +70,7 @@ void	Phonebook::searchContact(void) const
 		{
 			std::cout << "Index should be a number." << std::endl;
 		}
-		if (input > 0 && input < 8 && input <= this->getIndex())
+		if (input > 0 && input <= 8 && input <= this->getIndex())
 		{
 			std::cout << "\t\nFound it! Here's your contact information:\n" << std::endl;
 			this->printContact(this->_contact[input - 1]);

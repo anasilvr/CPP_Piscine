@@ -1,7 +1,6 @@
 #pragma once
 
 #include <iostream>
-#include "../include/Brain.hpp"
 
 # define BLK "\e[0;30m"
 # define RED "\e[0;31m"
@@ -25,20 +24,20 @@ using std::string;
 using std::cout;
 using std::endl;
 
-class Animal
+class WrongAnimal
 {
 protected:
 	string _type;	
 
 public:
-	Animal();
-	Animal(const string t);
-	Animal(const Animal &other);
-	Animal &operator=(const Animal &rhs);
-	virtual	~Animal();
+	WrongAnimal();
+	WrongAnimal(const string t);
+	WrongAnimal(const WrongAnimal &other);
+	WrongAnimal &operator=(const WrongAnimal &rhs);
+	virtual	~WrongAnimal();
 
 	string	getType() const;
 	void	setType(const string& t);
 
-	virtual void makeSound() const; 
+	void makeSound() const; 
 };

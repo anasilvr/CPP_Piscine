@@ -40,6 +40,7 @@ int main( int argc, char **argv )
 			{
 				line.erase(pos, wtarget.length());
 				line.insert(pos, wreplace);
+				pos += wreplace.length();
 				pos = line.find(wtarget, pos);
 			}
 			ofile << line;

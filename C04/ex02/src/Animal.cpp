@@ -1,36 +1,36 @@
 #include "../include/Animal.hpp"
 
-Animal::Animal() : _type("undefined") {
+AAnimal::AAnimal() : _type("undefined") {
 	cout << RED << "\t[Default]\tAnimal of type [" << _type << "] created." << RESET << endl;
 }
 
-Animal::Animal(const string t) : _type(t) {
+AAnimal::AAnimal(const string t) : _type(t) {
 	cout << RED << "\t[Defined]\tAnimal of type [" << _type << "] created." << RESET << endl;
 }
 
-Animal::Animal(const Animal &other){
+AAnimal::AAnimal(const AAnimal &other){
 	*this = other;
 	cout << RED << "\t[Copy]\tAnimal of type [" << _type << "] created." << RESET << endl;
 }
 
-Animal &Animal::operator=(const Animal &rhs){
+AAnimal &AAnimal::operator=(const AAnimal &rhs){
 	if (this != &rhs)
 		_type = rhs._type;
 	return (*this);
 }
 
-Animal::~Animal() {
+AAnimal::~AAnimal() {
 	cout << RED << "\tAnimal of type [" << _type << "] destroyed." << RESET << endl;
 }
 
-string	Animal::getType() const {
+string	AAnimal::getType() const {
 	return(_type);
 }
 
-void	Animal::setType(const string& t){
+void	AAnimal::setType(const string& t){
 	_type = t;
 }
 
-void Animal::makeSound() const {
+void AAnimal::makeSound() const {
 	cout << RED << "The [" << _type << "] animal is silent." << RESET << endl;
 } 

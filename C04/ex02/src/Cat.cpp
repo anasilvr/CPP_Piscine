@@ -1,9 +1,9 @@
 #include "../include/Cat.hpp"
 
-Cat::Cat() : Animal("cat"), _brain(new Brain()) {
+Cat::Cat() : AAnimal("cat"), _brain(new Brain()) {
 	cout << GRN <<"\t[Default]\tCat of type [" << _type << "] created." << RESET << endl;
 }
-Cat::Cat(const string t) : Animal(t), _brain (new Brain()) {
+Cat::Cat(const string t) : AAnimal(t), _brain (new Brain()) {
 	cout << GRN <<"\t[Defined]]\tCat of type [" << _type << "] created." << RESET << endl;
 }
 

@@ -25,20 +25,20 @@ using std::string;
 using std::cout;
 using std::endl;
 
-class Animal
+class AAnimal
 {
 protected:
 	string _type;	
 
 public:
-	Animal();
-	Animal(const string t);
-	Animal(const Animal &other);
-	Animal &operator=(const Animal &rhs);
-	virtual	~Animal();
+	AAnimal();
+	AAnimal(const string t);
+	AAnimal(const AAnimal &other);
+	AAnimal &operator=(const AAnimal &rhs);
+	virtual	~AAnimal();	
 
 	string	getType() const;
 	void	setType(const string& t);
 
-	virtual void makeSound() const; 
+	virtual void makeSound() const = 0; 
 };

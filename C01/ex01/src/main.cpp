@@ -3,18 +3,8 @@
 
 int main ( void )
 {
-	int nb;
+	int nb = 10;
 	int count = 0;
-
-	std::cout << "How many zombies do you want to create? (Min.: 5, Máx.: = 100, Default: 13)" << std::endl;
-	std::cin >> nb;
-	
-	if (nb < 5)
-		nb = 5;
-	else if (nb > 100)
-		nb = 100;
-	if (std::cin.eof())
-		nb = 13;
 
 	Zombie *horde = zombieHorde(nb, "Zombie");
 

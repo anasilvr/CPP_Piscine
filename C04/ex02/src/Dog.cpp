@@ -1,10 +1,10 @@
 #include "../include/Dog.hpp"
 #include "../include/Brain.hpp"
 
-Dog::Dog() : Animal("dog"), _brain(new Brain()) {
+Dog::Dog() : AAnimal("dog"), _brain(new Brain()) {
 	cout << YEL << "\t[Default]\tDog of type [" << _type << "] created." <<RESET << endl;
 }
-Dog::Dog(const string t) : Animal(t), _brain(new Brain()) {
+Dog::Dog(const string t) : AAnimal(t), _brain(new Brain()) {
 	cout << YEL << "\t[Defined]\tDog of type [" << _type << "] created." << RESET << endl;
 }
 

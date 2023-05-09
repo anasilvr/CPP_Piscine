@@ -63,6 +63,11 @@
 		"iomanip": "cpp",
 		"deque": "cpp",
 		"fstream": "cpp",
-		"stack": "cpp"
-	}
+		"stack": "cpp",
+		"filesystem": "cpp",
+		"__functional_03": "cpp",
+		"memory_resource": "cpp"
+	},
+	"clang-format.executable": "/Users/anarodri/Documents/CPP/.clang-format",
+	"editor.formatOnSave": true
 }
