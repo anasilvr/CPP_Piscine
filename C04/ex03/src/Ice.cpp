@@ -29,8 +29,7 @@ Ice::~Ice() {
 
 
 AMateria* Ice::clone(void) const {
-	Ice *clone = new Ice;
-	return (clone);
+	return (new Ice);
 }
 
 void Ice::use (ICharacter & target) {

@@ -26,10 +26,12 @@ CFLAGS	=	-Wall -Werror -Wextra -std=c++98 -I.
 RM		=	rm -rf
 
 # Dir and file names
-NAME	=	absclass
-SRCS	=	$(addprefix src/, main.cpp AMateria.cpp Character.cpp Ice.cpp MateriaSource.cpp)
+NAME	=	abstract
+SRCS	=	$(addprefix src/, main.cpp AMateria.cpp Character.cpp Cure.cpp \
+						Ice.cpp MateriaSource.cpp)
 OBJS	=	$(SRCS:.cpp=.o)
-INC		=	$(addprefix include/, AMateria.hpp Character.hpp Ice.hpp MateriaSource.hpp)
+INC		=	$(addprefix include/, colors.hpp AMateria.hpp Character.hpp Cure.hpp\
+						Ice.hpp MateriaSource.hpp)
 
 
 #------------------------------------------------------------------------------#
@@ -53,6 +55,7 @@ clean:
 # Removes objects and executables
 fclean: clean
 	$(HIDE)$(RM) $(NAME)
+	@rm -rf *.dSYM
 
 # Removes objects and executables and remakes
 re: fclean all

@@ -19,7 +19,6 @@ class ICharacter {
 
 class Character : public ICharacter {
 	public:
-		Character();
 		Character(string const n);
 		Character(const Character &other);
 		~Character();
