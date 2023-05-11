@@ -49,7 +49,7 @@ MateriaSource&	MateriaSource::operator=(const MateriaSource &rhs) {
 		for (int i = 0; i < 4; i++)
 			delete _list[i];
 		for (int i = 0; i < 4; i++)
-			_list[i] = rhs._list[i];
+			_list[i] = rhs._list[i]->clone();
 	}
 	return (*this);
 }

@@ -21,9 +21,11 @@ Character::Character(const Character &other) {
 Character &Character::operator=(const Character &rhs) {
 	if (this != &rhs)
 	{
-		_name = rhs._name;
+		_name = rhs.getName();
 		for (int i = 0; i < 4; i++)
-			_inventory[i] = rhs._inventory[i];
+			delete _inventory[i];
+		for (int i = 0; i < 4; i++)
+			_inventory[i] = rhs._inventory[i]->clone();
 	}
 	return *this;
 }
@@ -63,7 +65,7 @@ void Character::unequip(int idx) {
 			cout << RED "_inventory [" << idx << "][";
 			cout << _inventory[idx]->getType();
 			cout << "] unequiped." << endl;
-			_inventory[idx] = NULL;
+			_inventory[idx] = nullptr;
 		}
 		else
 			cout << RED "_inventory[" << idx << "] is empty already." << endl;

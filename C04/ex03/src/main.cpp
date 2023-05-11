@@ -7,21 +7,17 @@ int main()
 {
 	cout << BYEL "\t[Main] Creating new MateriaSource." RESET << endl;
 	IMateriaSource* src = new MateriaSource();
-
 	cout << BYEL "\t[Main] Learning a new materias." RESET << endl;
-	for (int i = 0; i < 10; i++) {
-		src->learnMateria(new Ice());
-		src->learnMateria(new Cure());
-	}
+	src->learnMateria(new Ice());
+	src->learnMateria(new Cure());
 	cout << BYEL "\t[Main] Creating a new character." RESET << endl;
 	ICharacter* me = new Character("me");
-
 	cout << BYEL "\t[Main] Creating and equipping new materias." RESET << endl;
-	AMateria* tmp;
-	tmp = src->createMateria("ice");
-	me->equip(tmp);
-	tmp = src->createMateria("cure");
-	me->equip(tmp);
+	AMateria* tmp[2];
+	tmp[0] = src->createMateria("ice");
+	me->equip(tmp[0]);
+	tmp[1] = src->createMateria("cure");
+	me->equip(tmp[1]);
 	me->unequip(0);
 	Character* bob = new Character("bob");
 	cout << BYEL "\t[Main] Attacking Bob." RESET << endl;
@@ -42,6 +38,8 @@ int main()
 	delete bob;
 	delete me;
 	delete src;
+	for (int i = 0; i < 2; i++)
+		delete tmp[i];
 	cout << BYEL "\t[Main] Bye la." RESET << endl;
  	return 0;
 }
