@@ -17,13 +17,8 @@ Cat::Cat(const Cat &other) : _brain(new Brain()) {
 
 Cat &Cat::operator=(const Cat &rhs) {
     if (this != &rhs) {
-        _type = rhs._type;
-        for (int i = 0; i < 100; i++) {
-            if (_brain[i])
-                _brain[i] = rhs._brain[i];
-            else
-                _brain[i] = NULL;
-        }
+        _type   = rhs._type;
+        *_brain = *rhs._brain;
     }
     return (*this);
 }
