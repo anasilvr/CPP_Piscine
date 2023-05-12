@@ -61,7 +61,7 @@ void	Bureaucrat::gradeUp(void) {
 		_grade--;
 		cout << YEL "Bureaucrat [" << _name;
 		cout << "] upgraded to [" << _grade;
-		cout << "]" NC << endl;
+		cout << "] \xF0\x9F\x94\xBA" NC << endl;
 	}
 }
 
@@ -72,7 +72,7 @@ void	Bureaucrat::gradeDown(void) {
 		_grade++;
 		cout << YEL "Bureaucrat [" << _name;
 		cout << "] downgraded to [" << _grade;
-		cout << "]" NC << endl;
+		cout << "] \xF0\x9F\x94\xBB" NC << endl;
 	}
 }
 

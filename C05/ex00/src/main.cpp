@@ -19,6 +19,8 @@ exception :
 	"<name>, bureaucrat grade <grade>"
 */
 
+#define ERR_MSG (std::cerr << RED "\xE2\x9D\x8C Error: " << e.what() << NC << endl)
+
 int main (void)
 {
 	cout << WHTHB "\n\tCreating bureaucrats (Two defaults, one by copy) and printing their details." NC << endl;
@@ -35,7 +37,7 @@ int main (void)
 		cout << Yuki;
 	}
 	catch (std::exception &e) {
-		std::cerr << RED "Error: " << e.what() << NC << endl;
+		ERR_MSG;
 	}
 
 	try {
@@ -43,7 +45,7 @@ int main (void)
 		cout << Caca;
 	}
 	catch (std::exception &e) {
-		std::cerr << RED "Error: " << e.what() << NC << endl;
+		ERR_MSG;
 	}
 
 		try {
@@ -51,7 +53,7 @@ int main (void)
 		cout << Duck;
 	}
 	catch (std::exception &e) {
-		std::cerr << RED "Error: " << e.what() << NC << endl;
+		ERR_MSG;
 	}
 
 	cout << WHTHB "\n\tTrying to gradeDown and gradeUp (exceding limits on gradeUp)" NC << endl;
@@ -62,7 +64,7 @@ int main (void)
 	 		Val.gradeUp();
 	}
 	catch (std::exception &e) {
-		std::cerr << RED "Error: " << e.what() << NC << endl;
+		ERR_MSG;
 	}
 
 	cout << WHTHB "\n\tTrying to gradeDown and gradeUp (exceding limits on gradeDown)" NC << endl;
@@ -73,16 +75,13 @@ int main (void)
 	 		Ana.gradeUp();
 	}
 	catch (std::exception &e) {
-		std::cerr << RED "Error: " << e.what() << NC << endl;
+		ERR_MSG;
 	}
 
-	cout << WHTHB "\n\tExit status of each bureaucrat:" NC << endl;
+	cout << WHTHB "\n\tPrinting ending values for each bureaucrat." NC << endl;
 	cout << Val;
 	cout << Yan;
 	cout << Ana;
-	// cout << Yuki;
-	// cout << Caca;
-	// cout << Duck; //these were never created 
 
 	cout << WHTHB "\n\tEnding program." NC << endl;
 }

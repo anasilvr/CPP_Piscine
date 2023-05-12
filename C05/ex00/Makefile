@@ -41,7 +41,7 @@ all: $(NAME)
 # Generates output file
 $(NAME): $(OBJS)
 	$(HIDE)$(CC) $(CFLAGS) $(OBJS) -o $@
-	@echo "\n\033[32m\033[1mBureaucrat Compiled!\033[0m"
+	@echo "\n\033[32m\033[1m./Bureaucrat Compiled!\033[0m"
 
 # Compiles sources into objects
 .cpp.o: $(SRCS) $(INC)
