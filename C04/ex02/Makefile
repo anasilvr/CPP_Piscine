@@ -24,10 +24,8 @@ clean:
 fclean: 	clean
 			@rm -f $(NAME)
 			@echo "\n\033[32m\033[1mCleaned!\n\033[0m"
+			@rm -rf *.dSYM
 
 re:			fclean all
-
-leak:		$(NAME)
-			@valgrind --suppressions=suppressions.supp --leak-check=full --track-origins=yes --show-leak-kinds=all ./Animals
 
 .PHONY: all clean fclean re

@@ -1,7 +1,0 @@
-{
-	basic_ostream supp
-	Memcheck:Leak
-	...
-	fun:fwrite
-	...
-}

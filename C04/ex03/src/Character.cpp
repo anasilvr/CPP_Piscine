@@ -3,9 +3,10 @@
 
 // Default constructor
 Character::Character(string const n) : _name(n) {
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 4; i++)
 		_inventory[i] = NULL;
-	}
+	for (int i = 0; i < 100; i++)
+		_dropped[i] = NULL;
 	cout << RED << "Character " << _name << " created." RESET << endl;
 	return;
 }
@@ -22,10 +23,18 @@ Character &Character::operator=(const Character &rhs) {
 	if (this != &rhs)
 	{
 		_name = rhs.getName();
-		for (int i = 0; i < 4; i++)
-			delete _inventory[i];
-		for (int i = 0; i < 4; i++)
-			_inventory[i] = rhs._inventory[i]->clone();
+		for (int i = 0; i < 4; i++) {
+			if (rhs._inventory[i])
+				_inventory[i] = rhs._inventory[i]->clone();
+			else
+				_inventory[i] = NULL;
+		}
+		for (int i = 0; i < 100; i++) {
+			if (rhs._dropped[i])
+				_dropped[i] = rhs._dropped[i]->clone();
+			else
+				_dropped[i] = NULL;
+		}
 	}
 	return *this;
 }
@@ -33,10 +42,14 @@ Character &Character::operator=(const Character &rhs) {
 // Default destructor
 Character::~Character() {
 	for (int i = 0; i < 4; i++) {
-		if (_inventory[i]) {
+		if (_inventory[i])
 			delete _inventory[i];
-			_inventory[i] = NULL;
-		}
+		_inventory[i] = NULL;
+	}
+	for (int i = 0; i < 100; i++) {
+		if (_dropped[i])
+			delete _dropped[i];
+		_dropped[i] = NULL;
 	}
 	cout << RED << "Character " << _name << " destroyed." RESET << endl;
 	return;
@@ -60,18 +73,22 @@ void Character::equip(AMateria* m) {
 }
 
 void Character::unequip(int idx) {
-	if (idx >= 0 && idx <= 3) {
-		if (_inventory[idx]) {
+	if (idx < 0 || idx > 3) {
+		cout << RED "_inventory[] only has 4 slots. Invalid index. Try again." << endl;
+		return ;
+	}
+	for (int i = 0; i < 100; i++) {
+		if (!_dropped[i]) {
+			_dropped[i] = _inventory[idx];
 			cout << RED "_inventory [" << idx << "][";
 			cout << _inventory[idx]->getType();
 			cout << "] unequiped." << endl;
 			_inventory[idx] = nullptr;
+			return ;
 		}
 		else
 			cout << RED "_inventory[" << idx << "] is empty already." << endl;
 	}
-	else
-		cout << RED "_inventory[] only has 4 slots. Invalid index. Try again." RESET << endl;
 }
 
 void Character::use(int idx, ICharacter& target) {

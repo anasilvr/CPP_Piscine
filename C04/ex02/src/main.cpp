@@ -10,5 +10,6 @@ int main ()
 	//AAnimal *animal = new AAnimal() // WON'T COMPILE
     AAnimal *animal = new Cat(); // COMPILES
     animal->makeSound();
+	delete animal;
     return 0;
 }

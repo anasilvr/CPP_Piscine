@@ -36,7 +36,7 @@ void MateriaSource::learnMateria(AMateria *m) {
 
 AMateria* MateriaSource::createMateria(std::string const & type) {
 	for (int i = 0; i < 4; i++){
-		if (_list[i]->getType() == type)
+		if (_list[i] && _list[i]->getType() == type)
 			return (_list[i]->clone());
 	}
 	cout << MAG << "Unkown materia. Aborting creation..." RESET << endl;

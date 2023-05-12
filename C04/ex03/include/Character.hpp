@@ -34,4 +34,5 @@ class Character : public ICharacter {
 	private:
 		string		_name;
 		AMateria	*_inventory[4];
+		AMateria	*_dropped[100];
 };
