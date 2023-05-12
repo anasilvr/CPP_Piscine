@@ -21,25 +21,40 @@ exception :
 
 int main (void)
 {
-	cout << BWHT "\n\tCreating bureaucrats (One default, one by copy) and printing their details." NC << endl;
+	cout << WHTHB "\n\tCreating bureaucrats (Two defaults, one by copy) and printing their details." NC << endl;
 	Bureaucrat Val("Val", 1);
+	Bureaucrat Ana ("Ana", 140);
 	Bureaucrat Yan (Val);
 	cout << Val;
 	cout << Yan;
+	cout << Ana;
 
-	cout << BWHT "\n\tTrying to create bureaucrats with invalid grade." NC << endl;
+	cout << WHTHB "\n\tTrying to create bureaucrats with invalid grades." NC << endl;
 	try {
 		Bureaucrat Yuki ("Yuki", 0);
-		Bureaucrat Ana ("Ana", -1);
-		Bureaucrat Duck ("Duck", 151);
 		cout << Yuki;
-		cout << Ana;
+	}
+	catch (std::exception &e) {
+		std::cerr << RED "Error: " << e.what() << NC << endl;
+	}
+
+	try {
+		Bureaucrat Caca ("Ana", -1);
+		cout << Caca;
+	}
+	catch (std::exception &e) {
+		std::cerr << RED "Error: " << e.what() << NC << endl;
+	}
+
+		try {
+		Bureaucrat Duck ("Duck", 151);
 		cout << Duck;
 	}
 	catch (std::exception &e) {
 		std::cerr << RED "Error: " << e.what() << NC << endl;
 	}
-cout << BWHT "\n\tTrying to gradeDown and gradeUp (exceding limits on gradeUp)" NC << endl;
+
+	cout << WHTHB "\n\tTrying to gradeDown and gradeUp (exceding limits on gradeUp)" NC << endl;
 	 try {
 		for (int i = 0; i < 10; i++)
 	 		Val.gradeDown();
@@ -49,5 +64,25 @@ cout << BWHT "\n\tTrying to gradeDown and gradeUp (exceding limits on gradeUp)" 
 	catch (std::exception &e) {
 		std::cerr << RED "Error: " << e.what() << NC << endl;
 	}
-	cout << BWHT "\n\tEnding program." NC << endl;
+
+	cout << WHTHB "\n\tTrying to gradeDown and gradeUp (exceding limits on gradeDown)" NC << endl;
+	 try {
+		for (int i = 0; i < 11; i++)
+	 		Ana.gradeDown();
+		for (int i = 0; i < 10; i++)
+	 		Ana.gradeUp();
+	}
+	catch (std::exception &e) {
+		std::cerr << RED "Error: " << e.what() << NC << endl;
+	}
+
+	cout << WHTHB "\n\tExit status of each bureaucrat:" NC << endl;
+	cout << Val;
+	cout << Yan;
+	cout << Ana;
+	// cout << Yuki;
+	// cout << Caca;
+	// cout << Duck; //these were never created 
+
+	cout << WHTHB "\n\tEnding program." NC << endl;
 }

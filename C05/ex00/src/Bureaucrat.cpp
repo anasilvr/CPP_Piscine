@@ -67,7 +67,7 @@ void	Bureaucrat::gradeUp(void) {
 
 void	Bureaucrat::gradeDown(void) {
 	if (_grade + 1 > 150)
-		throw (Bureaucrat::GradeTooHighException());
+		throw (Bureaucrat::GradeTooLowException());
 	else {
 		_grade++;
 		cout << YEL "Bureaucrat [" << _name;
