@@ -21,25 +21,25 @@ exception :
 
 int main (void)
 {
-	cout << BRED "\tCreating bureaucrats (One default, one by copy) and printing their details." NC << endl;
+	cout << BWHT "\n\tCreating bureaucrats (One default, one by copy) and printing their details." NC << endl;
 	Bureaucrat Val("Val", 1);
 	Bureaucrat Yan (Val);
 	cout << Val;
-	cout << Yan << endl;
+	cout << Yan;
 
-	cout << BRED "\tTrying to create bureaucrats with invalid grade." NC << endl;
+	cout << BWHT "\n\tTrying to create bureaucrats with invalid grade." NC << endl;
 	try {
 		Bureaucrat Yuki ("Yuki", 0);
 		Bureaucrat Ana ("Ana", -1);
 		Bureaucrat Duck ("Duck", 151);
 		cout << Yuki;
 		cout << Ana;
-		cout << Duck << endl;
+		cout << Duck;
 	}
 	catch (std::exception &e) {
 		std::cerr << RED "Error: " << e.what() << NC << endl;
 	}
-cout << BRED "\tTrying to gradeDown and gradeUp (exceding limits on gradeUp)" NC << endl;
+cout << BWHT "\n\tTrying to gradeDown and gradeUp (exceding limits on gradeUp)" NC << endl;
 	 try {
 		for (int i = 0; i < 10; i++)
 	 		Val.gradeDown();
@@ -49,4 +49,5 @@ cout << BRED "\tTrying to gradeDown and gradeUp (exceding limits on gradeUp)" NC
 	catch (std::exception &e) {
 		std::cerr << RED "Error: " << e.what() << NC << endl;
 	}
+	cout << BWHT "\n\tEnding program." NC << endl;
 }
