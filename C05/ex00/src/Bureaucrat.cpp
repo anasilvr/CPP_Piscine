@@ -24,7 +24,7 @@ Bureaucrat::Bureaucrat(string name, int grade) : _name(name), _grade(grade) {
 }
 
 // Copy constructor
-Bureaucrat::Bureaucrat(const Bureaucrat &other) {
+Bureaucrat::Bureaucrat(const Bureaucrat &other) : _name(other._name) {
   *this = other;
 	cout << YEL "Bureaucrat [" << _name;
 	cout << "] of grade [" << _grade;
