@@ -29,7 +29,7 @@ RM		=	rm -rf
 NAME	=	Bureaucrat
 SRCS	=	$(addprefix src/, main.cpp Bureaucrat.cpp AForm.cpp \
 			PresidentialPardonForm.cpp ShrubberyCreationForm.cpp \
-			RobotomyRequestForm.cpp)
+			RobotomyRequestForm.cpp Intern.cpp)
 OBJS	=	$(SRCS:.cpp=.o)
 INC		=	$(addprefix include/, wildcard *.hpp)
 

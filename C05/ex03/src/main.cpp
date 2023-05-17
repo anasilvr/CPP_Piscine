@@ -3,42 +3,22 @@
 #include "../include/ShrubberyCreationForm.hpp"
 #include "../include/RobotomyRequestForm.hpp"
 #include "../include/PresidentialPardonForm.hpp"
+#include "../include/Intern.hpp"
 
 /*
-TODO: 
----[x] FORM'S CHANGES
-[x] the base class Form must be an abstract class. 
-[x] the form’s attributes need to remain private.
+TODO:
+[] implement the Intern class. 
+	[] No name, no grade, no unique characteristics. The only
+	thing the bureaucrats care about is that they do their job.
 
----[x] BUREAUCRAT'S CHANGES
-[x] add the executeForm(Form const & form) member function to the Bureaucrat.
-It must attempt to execute the form. If it’s successful, print something like:
-<bureaucrat> executed <form> If not, print an explicit error message.
+[] makeForm() function.
+	[] It takes two strings: formName and its target
+	[] It return a pointer to a Form object (whose name is the one passed as parameter)
+whose target will be initialized to the second parameter.
+	[] Prints something like: Intern creates <form>
+	[] If the form name passed as parameter doesn’t exist, print an explicit error message.
 
----[x] NEW CONCRETE CLASSES
-Add the following concrete classes:
-[x] ShrubberyCreationForm: 
-	[x] Required grades: sign 145, exec 137
-	[x] Create a file <target>_shrubbery in the working directory, and writes ASCII trees inside it.
-
-[x] RobotomyRequestForm: 
-	[x] Required grades: sign 72, exec 45
-	[x] Makes some drilling noises. Then, informs that <target> has been robotomized 
-	successfully 50% of the time. Otherwise, informs that the robotomy failed.
-
-[x] PresidentialPardonForm: 
-	[x] Required grades: sign 25, exec 5
-	[x] Informs that <target> has been pardoned by Zaphod Beeblebrox.
-
-[x] add the execute(Bureaucrat const & executor) const member function to
-the base form and implement a function to execute the form’s action on the concrete
-classes.
-	[] Check that the form is signed
-	[] Check that the bureaucrat attempting to execute the form is high enough.
-	Otherwise, throw an appropriate exception.
-
-[] All of them take only one parameter in their constructor: the target of the form.
-For example, "home" if you want to plant shrubbery at home.
+[] No if/elseif/else forest.
 
 */
 
@@ -53,6 +33,9 @@ For example, "home" if you want to plant shrubbery at home.
 
 #define ERR_LIMITS \
     (std::cerr << RED "\xE2\x9D\x8C [Up/Downgrade] Error: " << e.what() << NC << endl)
+
+#define ERR_INTERN \
+    (std::cerr << RED "\xE2\x9D\x8C [Intern] Error: " << e.what() << NC << endl)
 
 int main(void) {
     cout << WHTHB
@@ -179,6 +162,50 @@ int main(void) {
     cout << t7;
     cout << t8;
     cout << t9;
+
+	cout << WHTHB "\n\tCreating interns and giving them jobs." NC << endl;
+	try {
+		Intern someRandomIntern;
+		AForm* rrf;
+		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+		delete rrf;
+	}
+	catch (std::exception &e) {
+		ERR_INTERN;
+	}
+
+	cout << endl;
+	try {
+		Intern someRandomIntern;
+		AForm* rrf;
+		rrf = someRandomIntern.makeForm("robotomy", "Homer");
+		delete rrf;
+	}
+	catch (std::exception &e) {
+		ERR_INTERN;
+	}
+
+	cout << endl;
+	try {
+		Intern someRandomIntern;
+		AForm* rrf;
+		rrf = someRandomIntern.makeForm("pardon", "Marge");
+		delete rrf;
+	}
+	catch (std::exception &e) {
+		ERR_INTERN;
+	}
+
+	cout << endl;
+	try {
+		Intern someRandomIntern;
+		AForm* rrf;
+		rrf = someRandomIntern.makeForm("shruberry", "Bart");
+		delete rrf;
+	}
+	catch (std::exception &e) {
+		ERR_INTERN;
+	}
 
     cout << WHTHB "\n\tEnding program." NC << endl;
 }
