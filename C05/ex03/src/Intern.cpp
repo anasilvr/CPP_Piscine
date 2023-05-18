@@ -33,10 +33,13 @@ AForm*	Intern::makeForm (string formName, string target) {
 	}
 	switch (option) {
 		case 0:
+			cout << CYN "Intern creates ShrubberyCreationForm." NC << endl;
 			return (new ShrubberyCreationForm(target));
 		case 1:
+			cout << CYN "Intern creates RobotomyRequestForm." NC << endl;
 			return (new RobotomyRequestForm(target));
 		case 2:
+			cout << CYN "Intern creates PresidentialPardonForm." NC << endl;
 			return (new PresidentialPardonForm(target));
 		default:
 			throw Intern::FormNotFound();

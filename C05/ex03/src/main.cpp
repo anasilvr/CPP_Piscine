@@ -7,18 +7,18 @@
 
 /*
 TODO:
-[] implement the Intern class. 
-	[] No name, no grade, no unique characteristics. The only
+[x] implement the Intern class. 
+	[x] No name, no grade, no unique characteristics. The only
 	thing the bureaucrats care about is that they do their job.
 
-[] makeForm() function.
+[x] makeForm() function.
 	[] It takes two strings: formName and its target
 	[] It return a pointer to a Form object (whose name is the one passed as parameter)
 whose target will be initialized to the second parameter.
 	[] Prints something like: Intern creates <form>
-	[] If the form name passed as parameter doesn’t exist, print an explicit error message.
+	[x] If the form name passed as parameter doesn’t exist, print an explicit error message.
 
-[] No if/elseif/else forest.
+[x] No if/elseif/else forest.
 
 */
 
