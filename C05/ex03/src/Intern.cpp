@@ -45,3 +45,8 @@ AForm*	Intern::makeForm (string formName, string target) {
 			throw Intern::FormNotFound();
 	}
 }
+
+const char *Intern::FormNotFound::what () const throw () {
+	return ("Intern is panicking because he couldn't find this form.\
+	\n\t    Options: \"shruberry\", \"robotomy\" and \"pardon\".");
+}

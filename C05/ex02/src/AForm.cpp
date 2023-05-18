@@ -84,3 +84,15 @@ std::ostream& operator<<(std::ostream& out, AForm const& arg) {
     out << NC "\n" << endl;
     return (out);
 }
+
+const char *AForm::GradeTooHighException::what () const throw () {
+		return ("Grade Too High!");
+}
+
+const char *AForm::GradeTooLowException::what () const throw () {
+		return ("Grade Too Low!");
+}
+
+const char *AForm::NotSigned::what () const throw () {
+		return ("Form not signed. Execution failed.");
+}

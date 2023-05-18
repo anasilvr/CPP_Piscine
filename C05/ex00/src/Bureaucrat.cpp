@@ -83,3 +83,11 @@ std::ostream& operator<<(std::ostream& out, Bureaucrat const& arg){
 	out << "." << NC << endl;
 	return (out);
 }
+
+const char *Bureaucrat::GradeTooHighException::what () const throw () {
+		return ("Grade Too High!");
+}
+
+const char *Bureaucrat::GradeTooLowException::what () const throw () {
+		return ("Grade Too Low!");
+}

@@ -15,10 +15,7 @@ class Intern {
 
 	class FormNotFound : public std::exception {
 		public:
-			const char * what () const throw () {
-				return ("Intern is panicking because he couldn't find this form.\
-				\n\t    Options: \"shruberry\", \"robotomy\" and \"pardon\".");
-			}
+			const char * what () const throw ();
 	};
  
  private:

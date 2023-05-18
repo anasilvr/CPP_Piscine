@@ -22,33 +22,20 @@ class AForm {
     void         beSigned(const Bureaucrat& b);
     virtual void execute(Bureaucrat const& executor) const = 0;
 
-    class GradeTooHighException : public std::exception {
-       public:
-        const char* what() const throw() {
-            return ("Grade Too High!");
-        }
-    };
+	class GradeTooHighException : public std::exception {
+		public:
+			const char * what () const throw ();
+	};
 
-    class GradeTooLowException : public std::exception {
-       public:
-        const char* what() const throw() {
-            return ("Grade Too Low!");
-        }
-    };
+	class GradeTooLowException : public std::exception {
+		public:
+			const char * what () const throw ();
+	};
 
 	class NotSigned : public std::exception {
-       public:
-        const char* what() const throw() {
-            return ("Form not signed. Execution failed.");
-        }
-    };
-
-	// class AlreadySigned : public std::exception {
-    //    public:
-    //     const char* what() const throw() {
-    //         return ("Form already signed.");
-    //     }
-    // };
+		public:
+			const char * what () const throw ();
+	};
 
    private:
     AForm();
