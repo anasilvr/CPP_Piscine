@@ -22,7 +22,7 @@ endif
 
 # Compiler and flags
 CC		=	c++
-CFLAGS	=	-Wall -Werror -Wextra -I. -std=c++98 -Wconversion
+CFLAGS	=	-Wall -Werror -Wextra -I. -std=c++98
 RM		=	rm -rf
 
 # Dir and file names

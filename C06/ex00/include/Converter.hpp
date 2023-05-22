@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <iomanip>
 
 #include "../include/colors.hpp"
 
@@ -13,34 +14,57 @@ using std::string;
 // Class declaration
 class Converter {
    public:
-    Converter(const string &arg);
+    Converter(const string arg);
     ~Converter();
 
+	void	detectType(void);
+	char	toChar(void) const;
+	int		toInt(void) const;
+	float	toFloat(void) const;
+	double	toDouble(void) const;
+   
    private:
     enum type {
         CHAR,
         INT,
         FLOAT,
         DOUBLE,
-        PSEUDO,
-        NOTSET,
-        INVALID,
     };
 
     Converter();
     Converter(const Converter &other);
     Converter &operator=(const Converter &rhs);
 
-    const string getLiteral(void);
-    void         detectType(void);
+    const string getLiteral(void) const;
 
-    void isChar(void);
-    void isInt(void);
-    void isFloat(void);
-    void isDouble(void);
 
-    const string &_literal;
+
+	class Invalid : public std::exception {
+		public:
+			const char *what() const throw();
+	};
+
+	class NonDisplayable : public std::exception {
+		public:
+			const char *what() const throw();
+	};
+
+	class Impossible : public std::exception {
+		public:
+			const char *what() const throw();
+	};
+
+    const string _literal;
+	const char* _cLiteral;
+	size_t	_len;
+
+	char _charConv;
+	int	_intConv;
+	float _floatConv;
+	double	_doubleConv;
+	int	_precision;
+	
     type          _argType;
 };
 
-typedef void (Converter::*funcPtr[4])(void);
+std::ostream& operator<<(std::ostream& out, Converter const& arg);

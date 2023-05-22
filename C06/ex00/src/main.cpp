@@ -14,9 +14,9 @@ notation)
 [] display the results as shown below
 
 ---[] EXCEPTIONS ?
-        [] non displayable characters shouldn’t be used as inputs (char: Non
+        [x] non displayable characters shouldn’t be used as inputs (char: Non
 displayable)
-        [] does not make any sense or overflows ([type]: impossible)
+        [x] does not make any sense or overflows ([type]: impossible)
 
 PDF:
         ./convert 0
@@ -44,11 +44,19 @@ double: 42.0
 
 int main(int ac, char **av) {
     if (ac == 2) {
-        Converter arg(av[1]);
-        return (0);
+		try {
+	        Converter arg(av[1]);
+			cout << arg;
+		}
+	    catch (std::exception &e) {
+			ERR_MSG;
+		}
+		return (0);
     }
-    cout << RED
-        "Error: Invalid number of arguments.\nUsage: ./convert [argument]" NC
-         << endl;
-    return (-1);
+	else {
+		cout << RED;
+		cout << "Error: Invalid number of arguments.\nUsage: ./convert [argument]";
+		cout << NC << endl;
+		return (-1);
+	}
 }
