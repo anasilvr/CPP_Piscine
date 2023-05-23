@@ -8,6 +8,7 @@ Converter::Converter(const string arg) : _literal(arg) {
     if (arg.empty()) throw Invalid();
 
     _cLiteral = arg.c_str();
+    _len      = _literal.length();
     // cout << YEL "Converter creation with arg [" << _literal << "] ";
 
     // cout << "] and ASCII value of [";
@@ -16,7 +17,7 @@ Converter::Converter(const string arg) : _literal(arg) {
     // cout << "]" << NC << endl;
 
     detectType();
-	
+
     return;
 }
 
@@ -37,42 +38,49 @@ Converter::~Converter() {
 }
 
 void Converter::detectType(void) {
-    if (_literal.length() == 1) {
+    if (_len == 1) {
         if (isdigit(_literal.front())) {
-            _intConv = static_cast<int>(stoi(_literal));
+            _intConv = stoi(_literal);
             _argType = INT;
         } else {
-            _charConv = static_cast<char>(_literal.front());
+            _charConv = _cLiteral[0];
             _argType  = CHAR;
         }
+        return;
+    }
+
+    else if (!_literal.compare("-inff") || !_literal.compare("+inff") ||
+             !_literal.compare("nanf") || !_literal.compare("-inf") ||
+             !_literal.compare("+inf") || !_literal.compare("nan")) {
+        _argType = PSEUDO;
     } else {
-        char  *remL;
-        long   retL = strtol(_cLiteral, &remL, 10);
-        char  *remD;
-        double retD = strtod(_cLiteral, &remD);
-
-        // cout << WHTHB "retL = " << retL << NC << endl;
-        // cout << WHTHB "retD = " << retD << NC << endl;
-
-        if (*remL) {
-            for (int i = 0; remL[i]; i++) _precision++;
-            //	cout << WHTHB "remL = " << remL << NC << endl;
-            if (*remD) {
-                //		cout << WHTHB "remD = " << remD << NC << endl;
-                if (*remD == 'f') {
-                    _floatConv = static_cast<float>(retD);
-                    _argType   = FLOAT;
-                } else
-                    throw(Invalid());
-            } else {
-                _doubleConv = retD;
-                _argType    = DOUBLE;
-            }
+        int dot = -1;
+        int f   = -1;
+        for (int i = 0; _cLiteral[i]; i++)
+            if (_cLiteral[i] == 'f') f++;
+        for (int i = 0; _cLiteral[i]; i++)
+            if (_cLiteral[i] == '.') dot++;
+        if (dot > 0 || f > 0) throw(Invalid());
+        if (_literal.find_first_not_of("-+0123456789.f") != string::npos)
+            throw(Invalid());
+        if (f == 0) {
+            f = _literal.find_first_of("f");
+            if (f == (static_cast<int>(_len) - 1)) {
+                _floatConv = strtof(_cLiteral, NULL);
+                _argType   = FLOAT;
+                return;
+            } else
+                throw(Invalid());
+        } else if (dot == 0) {
+            _doubleConv = strtod(_cLiteral, NULL);
+            _argType    = DOUBLE;
+            return;
         } else {
-            if (retL > INT_MAX || retL < INT_MIN)
+            long test = strtol(_cLiteral, NULL, 10);
+            if (test > INT_MAX || test < INT_MIN)
                 throw(Invalid());
             else {
-                _intConv = static_cast<int>(retL);
+                _intConv = static_cast<int>(test);
                 _argType = INT;
             }
         }
@@ -80,35 +88,38 @@ void Converter::detectType(void) {
 }
 
 char Converter::toChar(void) const {
-    char value = 0;
     switch (_argType) {
         case CHAR:
             return (_charConv);
 
         case INT:
-            value = static_cast<char>(_intConv);
-            if (!isprint(value))
+            if (_intConv >= CHAR_MAX || _intConv < CHAR_MIN)
+                throw(Impossible());
+            if (!isprint(_intConv))
                 throw(NonDisplayable());
             else
-                return (value);
+                return (static_cast<char>(_intConv));
 
         case FLOAT:
-            value = static_cast<float>(_floatConv);
-            if (isnan(_floatConv) || isinf(_floatConv))
+            if (isnan(_floatConv) || isinf(_floatConv) ||
+                _floatConv >= CHAR_MAX || _floatConv < CHAR_MIN)
                 throw(Impossible());
-            else if (!isprint(value))
+            else if (!isprint(_floatConv))
                 throw(NonDisplayable());
             else
-                return (value);
+                return (static_cast<char>(_floatConv));
 
         case DOUBLE:
-            value = static_cast<double>(_doubleConv);
-            if (isnan(_doubleConv) || isinf(_doubleConv))
+            if (isnan(_doubleConv) || isinf(_doubleConv) ||
+                _doubleConv >= CHAR_MAX || _doubleConv < CHAR_MIN)
                 throw(Impossible());
-            else if (!isprint(value))
+            else if (!isprint(_doubleConv))
                 throw(NonDisplayable());
             else
-                return (value);
+                return (static_cast<char>(_doubleConv));
+
+        case PSEUDO:
+            throw(Impossible());
     }
 }
 
@@ -121,18 +132,19 @@ int Converter::toInt(void) const {
             return (_intConv);
 
         case FLOAT:
-            if (isnan(_floatConv) || isinf(_floatConv) ||
-                _floatConv > INT_MAX || _floatConv < INT_MIN)
+            if (_floatConv >= INT_MAX || _floatConv < INT_MIN)
                 throw(Impossible());
             else
                 return (static_cast<int>(_floatConv));
 
         case DOUBLE:
-            if (isnan(_doubleConv) || isinf(_doubleConv) ||
-                _doubleConv > INT_MAX || _doubleConv < INT_MIN)
+            if (_doubleConv >= INT_MAX || _doubleConv < INT_MIN)
                 throw(Impossible());
             else
                 return (static_cast<int>(_doubleConv));
+
+        case PSEUDO:
+            throw(Impossible());
     }
 }
 
@@ -145,33 +157,39 @@ float Converter::toFloat(void) const {
             return (static_cast<float>(_intConv));
 
         case FLOAT:
-            return (static_cast<float>(_floatConv));
+            return (_floatConv);
 
         case DOUBLE:
-            return (_doubleConv);
+            return (static_cast<float>(_doubleConv));
+
+        case PSEUDO:
+            return (strtof(_cLiteral, NULL));
     }
 }
 
 double Converter::toDouble(void) const {
     switch (_argType) {
         case CHAR:
-            return (static_cast<float>(_charConv));
+            return (static_cast<double>(_charConv));
 
         case INT:
-            return (static_cast<float>(_intConv));
+            return (static_cast<double>(_intConv));
 
         case FLOAT:
-            return (_floatConv);
+            return (static_cast<double>(_floatConv));
 
         case DOUBLE:
-            return (static_cast<float_t>(_doubleConv));
+            return (_doubleConv);
+
+        case PSEUDO:
+            return (strtod(_cLiteral, NULL));
     }
 }
 std::ostream &operator<<(std::ostream &out, Converter const &arg) {
     // CHAR
     out << "char: ";
     try {
-        const char c = arg.toChar();
+        char c = arg.toChar();
         out << "'" << c << "'" << endl;
     } catch (std::exception &e) {
         out << e.what() << NC << endl;
@@ -179,7 +197,7 @@ std::ostream &operator<<(std::ostream &out, Converter const &arg) {
     // INT
     out << "int: ";
     try {
-        const int i = arg.toInt();
+        int i = arg.toInt();
         out << i << endl;
     } catch (std::exception &e) {
         out << e.what() << NC << endl;
@@ -187,20 +205,20 @@ std::ostream &operator<<(std::ostream &out, Converter const &arg) {
     // FLOAT
     out << "float: ";
     try {
-        float  f          = arg.toFloat();
-        double fractional = modf(f, &fractional);
-     //   if (fractional == 0) out.precision(1);
-        out << std::showpoint << f << "f" << std::endl;
+        float  f       = arg.toFloat();
+        double intpart = modf(f, &intpart);
+        if (intpart == 0) out.precision(1);
+        out << std::fixed << f << "f" << endl;
     } catch (std::exception &e) {
         out << e.what() << NC << endl;
     }
     // DOUBLE
-    // out.precision and format flag floatfield
-    // will already be set from float if needed
     out << "double: ";
     try {
-        double d = arg.toDouble();
-        out << d << std::endl;
+        double d       = arg.toDouble();
+        double intpart = modf(d, &intpart);
+        if (intpart == 0) out.precision(1);
+        out << std::fixed << d << std::endl;
 
     } catch (std::exception &e) {
         out << e.what() << NC << endl;

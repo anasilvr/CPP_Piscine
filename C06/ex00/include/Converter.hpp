@@ -48,17 +48,19 @@ class Converter {
         INT,
         FLOAT,
         DOUBLE,
+        PSEUDO,
     };
 
     const string _literal;
     const char  *_cLiteral;
+    size_t       _len;
     type         _argType;
 
     char   _charConv;
     int    _intConv;
     float  _floatConv;
     double _doubleConv;
-    int    _precision;
+    string _pseudo;
 };
 
 std::ostream &operator<<(std::ostream &out, Converter const &arg);

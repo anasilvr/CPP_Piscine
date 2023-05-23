@@ -4,8 +4,8 @@ TODO:
 common form:
         [x] char (ex.: ’c’, ’a’, ...)
         [x] int (ex.: 0, -42, 42...)
-        [x] float (ex.:0.0f, -4.2f, 4.2f... and -inff, +inff, nanf)
-        [x] double (ex.: 0.0, -4.2, 4.2... and -inf, +inf and nan) (decimal
+        [ ] float (ex.:0.0f, -4.2f, 4.2f... and -inff, +inff, nanf)
+        [ ] double (ex.: 0.0, -4.2, 4.2... and -inf, +inf and nan) (decimal
 notation)
 
 [x] detect the type of the literal passed as parameter
@@ -42,19 +42,18 @@ double: 42.0
 
 int main(int ac, char **av) {
     if (ac == 2) {
-		try {
-	        Converter arg(av[1]);
-			cout << arg;
-		}
-	    catch (std::exception &e) {
-			ERR_MSG;
-		}
-		return (0);
+        try {
+            Converter arg(av[1]);
+            cout << arg;
+        } catch (std::exception &e) {
+            ERR_MSG;
+        }
+        return (0);
+    } else {
+        std::cerr << RED;
+        std::cerr << "Error: Invalid number of arguments.\nUsage: ./convert "
+                     "[argument]";
+        std::cerr << NC << endl;
+        return (-1);
     }
-	else {
-		std::cerr << RED;
-		std::cerr << "Error: Invalid number of arguments.\nUsage: ./convert [argument]";
-		std::cerr << NC << endl;
-		return (-1);
-	}
 }
