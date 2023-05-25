@@ -13,5 +13,6 @@ int main () {
 	
 	identify(test1);
 	identify(ref1);
+
 	delete test1;
 }

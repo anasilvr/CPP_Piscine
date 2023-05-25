@@ -20,19 +20,19 @@ class AForm;
 
 // Class declaration
 class Bureaucrat {
- public:
-  Bureaucrat(string name, int grade);
-  Bureaucrat(const Bureaucrat &other);
-  Bureaucrat &operator=(const Bureaucrat &rhs);
-  ~Bureaucrat();
+	public:
+		Bureaucrat(string name, int grade);
+		Bureaucrat(const Bureaucrat &other);
+		Bureaucrat &operator=(const Bureaucrat &rhs);
+		~Bureaucrat();
 
-	string const getName (void) const;
-	int		getGrade (void) const;
-	void	gradeUp(void);
-	void	gradeDown(void);
+		string const getName (void) const;
+	int			getGrade (void) const;
+	void		gradeUp(void);
+	void		gradeDown(void);
 
-	void signForm(AForm &f);
-	void executeForm(AForm const &form);
+	void 	signForm(AForm &f);
+	void 	executeForm(AForm const &form);
 
 	class GradeTooHighException : public std::exception {
 		public:
