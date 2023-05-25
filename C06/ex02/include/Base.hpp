@@ -8,10 +8,9 @@ class Base {
 	private:
 };
 
+// randomly instanciates A, B or C and returns the instance as a Base pointer
 Base * generate(void);
-// andomly instanciates A, B or C and returns the instance as a Base pointer
 
+// prints the actual type of the object pointed to by p ("A", "B" or "C")
 void identify(Base* p);
-
-
 void identify(Base& p);
