@@ -22,14 +22,14 @@ endif
 
 # Compiler and flags
 CC		=	c++
-CFLAGS	=	-Wall -Werror -Wextra -I. -Wno-conversion -std=c++98 -g
+CFLAGS	=	-Wall -Werror -Wextra -Wno-conversion -std=c++98 -I.
 RM		=	rm -rf
 
 # Dir and file names
-NAME	=	converter
-SRCS	=	$(addprefix src/, main.cpp Converter.cpp)
+NAME	=	serialize
+SRCS	=	main.cpp
 OBJS	=	$(SRCS:.cpp=.o)
-INC		=	$(addprefix include/, wildcard *.hpp)
+INC		=	$(wildcard *.hpp)
 
 
 #------------------------------------------------------------------------------#
@@ -53,62 +53,7 @@ clean:
 # Removes objects and executables
 fclean: clean
 	$(HIDE)$(RM) $(NAME)
+	$(RM) *.dSYM
 
 # Removes objects and executables and remakes
 re: fclean all
-
-test: all
-	./$(NAME) 0
-	@sleep 0.5
-
-	@echo "\n"
-	./$(NAME) 0.0
-	@sleep 0.5
-
-	@echo "\n"
-	./$(NAME) 000000000000000000000000.00000000000000000000000
-	@sleep 0.5
-
-	@echo "\n"
-	./$(NAME) 0.f
-	@sleep 0.5
-
-	@echo "\n"
-	./$(NAME) nanf
-	@sleep 0.5
-
-	@echo "\n"
-	./$(NAME) -inff
-	@sleep 0.5
-
-	@echo "\n"
-	./$(NAME) +inff
-	@sleep 0.5
-
-	@echo "\n"
-	./$(NAME) nan
-	@sleep 0.5
-
-	@echo "\n"
-	./$(NAME) -inf
-	@sleep 0.5
-
-	@echo "\n"
-	./$(NAME) +inf
-	@sleep 0.5
-	
-	@echo "\n"
-	./$(NAME) +inf
-	@sleep 0.5
-
-	@echo "\n"
-	./$(NAME) 42.0f
-	@sleep 0.5
-
-	@echo "\n"
-	./$(NAME) 2147483647
-	@sleep 0.5
-
-	@echo "\n"
-	./$(NAME) 2147483648
-	@sleep 0.5
