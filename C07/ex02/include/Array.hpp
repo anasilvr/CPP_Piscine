@@ -20,5 +20,5 @@ member function takes no parameter and musn’t modify the current instance.
 
 [ ] As usual, ensure everything works as expected and turn in a main.cpp file that con-
 tains your tests.
- Oi, bonito.
+
 */
