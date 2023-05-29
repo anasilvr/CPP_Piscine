@@ -53,6 +53,7 @@ void Converter::detectType(void) {
              !_literal.compare("nanf") || !_literal.compare("-inf") ||
              !_literal.compare("+inf") || !_literal.compare("nan")) {
         _argType = PSEUDO;
+		
     } else {
         int dot = -1;
         int f   = -1;
