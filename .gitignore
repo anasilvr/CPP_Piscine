@@ -50,5 +50,4 @@ dkms.conf
 
 #Vscode
 .vscode/
-
 .DS_Store
