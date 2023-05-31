@@ -2,15 +2,9 @@
 
 /* ---------- CANON ---------- */
 // Default constructor
-Span::Span() : _size(0) { 
-	cout << GRN "Span[" << _size << "] created." NC << endl;
-	return;
-}
+Span::Span() : _size(0) { return ;}
 
-Span::Span(unsigned int N) : _size(N) {
-	cout << GRN "Span[" << _size << "] created." NC << endl;
-	return;
-}
+Span::Span(unsigned int N) : _size(N) {	return; }
 
 // Copy constructor
 Span::Span(const Span &other) : _size(other._size) {
@@ -20,19 +14,12 @@ Span::Span(const Span &other) : _size(other._size) {
 
 // Copy assignment overload
 Span &Span::operator=(const Span &rhs) {
-  if (this != &rhs) {
-	_span = rhs._span;
-	//copies all contents using iterator.
-	// _N = rhs.nameofvector.size();
-  }
+  if (this != &rhs) { _span = rhs._span; }
   return *this;
 }
 
 // Default destructor
-Span::~Span() { 
-	cout << GRN "Span[" << _size << "] destroyed." NC << endl;
-	return;
-}
+Span::~Span() { return; }
 
 
 /* ---------- MEMBERS FUNCTIONS ---------- */
@@ -42,12 +29,6 @@ void				Span::addNumber(int element) {
 		throw FullSpan();
 	else
 		_span.push_back(element);
-
-	cout << "\tspan size: " << _span.size();
-	cout << "\tcontent: ";
-	for (unsigned long i = 0; i < _span.size(); i++)
-    	cout << _span.at(i) << " ";
-	cout << endl;
 }
 
 void				Span::addNumber(const std::vector<int>::iterator& begin, const std::vector<int>::iterator& end) {
@@ -59,22 +40,26 @@ void				Span::addNumber(const std::vector<int>::iterator& begin, const std::vect
 		}
 	else
 		_span.insert(_span.end(), begin, end);
-
-	cout << "\tspan size: " << _span.size();
-	cout << "\tcontent: ";
-	for (unsigned long i = 0; i < _span.size(); i++)
-    	cout << _span.at(i) << " ";
-	cout << endl;
 }
 
 unsigned int		Span::shortestSpan() const {
-	cout << "coucou" << endl;
-	return (1);
+	if (_size <= 1)
+		throw(InvalidSpan());
+	
+	vector<int> tmp (_span);
+	vector<int> diff;
+
+	std::sort(tmp.begin(), tmp.end());
+	std::adjacent_difference(tmp.begin(), tmp.end(), std::back_inserter(diff));
+	return (*std::min_element(diff.begin(), diff.end()));
 }
 
 unsigned int		Span::longestSpan() const {
-	cout << "coucou" << endl;
-	return (1);
+	if (_size <= 1)
+		throw(InvalidSpan());
+	int max = *std::max_element(_span.begin(), _span.end());
+	int min = *std::min_element(_span.begin(), _span.end());
+	return (max - min);
 }
 
 /* ---------- EXCEPTIONS ---------- */
@@ -84,5 +69,11 @@ const char *Span::InvalidSpan::what() const throw() {
 
 
 const char *Span::FullSpan::what() const throw() {
-	return ("Span's container is already full.");
+	return ("Span is already full.");
 }
+
+	// cout << "\t[container] size: " << [container].size();
+	// cout << "\tcontent: ";
+	// for (unsigned long i = 0; i < [container].size(); i++)
+    //		cout << [container].at(i) << " ";
+	// cout << endl;

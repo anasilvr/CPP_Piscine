@@ -66,7 +66,9 @@
 		"stack": "cpp",
 		"filesystem": "cpp",
 		"__functional_03": "cpp",
-		"memory_resource": "cpp"
+		"memory_resource": "cpp",
+		"list": "cpp",
+		"numeric": "cpp"
 	},
 	"clang-format.executable": "/Users/anarodri/Documents/CPP/.clang-format",
 	"editor.formatOnSave": true

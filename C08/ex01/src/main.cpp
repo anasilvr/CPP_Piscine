@@ -1,5 +1,8 @@
 #include "../include/Span.hpp"
 
+template<typename T>
+void message(T msg) { cout << msg << endl; }
+
 int main()
 {
 	Span sp = Span(5);
@@ -9,11 +12,10 @@ int main()
 	sp.addNumber(17);
 	sp.addNumber(9);
 	sp.addNumber(11);
-	sp.addNumber(10);
+//	sp.addNumber(10);
 	} catch (std::exception &e) { std::cerr << e.what() << endl; }
-
-	std::cout << sp.shortestSpan() << std::endl;
-	std::cout << sp.longestSpan() << std::endl;
-	
+	message(sp.shortestSpan());
+	message(sp.longestSpan());
+	Span test (sp);
 	return (0);
 }

@@ -24,6 +24,8 @@ even better.
 
 #include <vector>
 #include <iterator>
+#include <algorithm>
+#include <numeric>
 #include <iostream>
 #include "../include/colors.hpp"
 
