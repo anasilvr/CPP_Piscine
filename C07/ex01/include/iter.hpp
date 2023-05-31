@@ -22,7 +22,7 @@ void	iter(T *array, size_t len, void (*f)(const T&)) {
 	}
 }
 
-template<typename T>
-void	print(T const &content) {
-	std::cout << content << std::endl;
-}
+// template<typename T>
+// void	print(T const &content) {
+// 	std::cout << content << std::endl;
+// }

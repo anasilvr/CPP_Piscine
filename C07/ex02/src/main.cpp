@@ -33,7 +33,7 @@ int main () {
 	std::cout << W "\ntest3: parametric constructor (n = 10)" NC << std::endl;
 	try {
 		Array<int> test3 (10);
-		for (unsigned int i = 0; i < 10; i++)
+		for (unsigned int i = 0; i < 5; i++)
 			test3[i] = i;
 		std::cout << "test3 size: " <<  test3.size() << std::endl;
 		std::cout << "test3 content: " << std::endl;
@@ -84,6 +84,7 @@ int main () {
 	try {
 			int * a = new int();
 			std::cout << *a << std::endl;
+			delete a;
 	}
 	catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;

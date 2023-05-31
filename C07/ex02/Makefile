@@ -53,6 +53,7 @@ clean:
 # Removes objects and executables
 fclean: clean
 	$(HIDE)$(RM) $(NAME)
+	$(RM) *.dSYM
 
 # Removes objects and executables and remakes
 re: fclean all

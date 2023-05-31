@@ -32,11 +32,8 @@ template <typename T>
 class Array {
 	public:
 		Array() : _arr(new T[0]), _size(0) { return; }
-		Array(unsigned int n) : _arr(new T[n]), _size(n) { return; }
-		Array(const Array &other) {\
-			*this = other;
- 			return;
-		}
+		Array(unsigned int N) : _arr(new T[N]), _size(N) { return; }
+		Array(const Array &other) { *this = other; return; }
 		Array &operator=(const Array &rhs) {
 			if (this != &rhs) {
 				_size = rhs._size;
@@ -48,13 +45,14 @@ class Array {
 		}
 		~Array() { delete []_arr; };
 
-		unsigned int size() const { return _size; }
+		unsigned int size() const { return (_size); };
 
 		T &operator[](unsigned int i) {
 			if (i >= _size)
 				throw (Array<T>::OutOfBounds());
 			return _arr[i];
 		};
+
 		class OutOfBounds : public std::exception {
                 public:
                         const char * what () const throw () {
