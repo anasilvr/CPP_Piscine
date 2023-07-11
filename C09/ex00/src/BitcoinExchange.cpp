@@ -80,7 +80,8 @@ void BitcoinExchange::parseInput() {
 void BitcoinExchange::parseData() {
 	string buff;
 	string date;
-	string rate;
+	string value;
+	float rate;
 
 	size_t pos = 0;
 	size_t offset = 0;
@@ -94,11 +95,13 @@ void BitcoinExchange::parseData() {
 		size_t delimiterPos = buff.find(",");
 		if (delimiterPos != string::npos) {
 			date = buff.substr(0, delimiterPos);
-			rate = buff.substr(delimiterPos + 1);
+			value = (buff.substr(delimiterPos + 1));
+			cout << value << endl;
+			rate = -1;
 		}
 		else {
 			date = buff;
-			rate = "";
+			rate = -1;
 		}
 		_dataMap.insert(std::make_pair(date, rate));
 		pos++; // Move to the next character after '\n'
@@ -116,26 +119,37 @@ static bool isDateValid(const std::string& date) {
     return !iss.fail();
 }
 
-static bool isValueValid(const std::string& value) {
-
-}
-
 void BitcoinExchange::generateOutput() const {
-	for (multimap<string, string>::const_iterator it= _inputMap.begin(); it != _inputMap.end(); ++it)
+	multimap<string, string>::const_iterator it = _inputMap.begin();
+	while (it != _inputMap.end())
 	{
-		string output;
-		if (isDateValid(it->first) && isValueValid(it->second))
+		if (it->second.length() == 0 || it->second.size() < 2 || !isDateValid(it->first)) {
+			cout << "Error: bad input => " << it->first;
+			++it;
+			continue ;
+		}
+		try
 		{
-			multimap<string, string>::const_iterator itData = _dataMap.find(it->first);
-			if (itData != _dataMap.end())
+			if (std::stod(it->second) > 1000)
+				cout << "Error: too large a number." << it->first;
+			if (std::stod(it->second) < 0)
+				cout << "Error: not a positive number." << it->first;
+			else
 			{
-				float result = stof(it->second) * stof(itData->second);
-				string value = std::to_string(result);
-				output = it->first + " => " + it->second + " = " + value;
-				cout << output << endl;
+				multimap<string, float>::const_iterator itData = _dataMap.find(it->first);
+				if (itData != _dataMap.end())
+				{
+					float result = stof(it->second) * itData->second;
+					string value = std::to_string(result);
+					//output = it->first + " => " + it->second + " = " + value;
+					cout << it->first << " => " << it->second << " = " << value << endl;
+				}
 			}
 		}
-		else
-			output = "Error: bad input.\n"
+		catch (const std::exception &e) 
+		{
+			cout << "Error : Invalid input." << endl;
+		}	
+		++it;
     }
 }

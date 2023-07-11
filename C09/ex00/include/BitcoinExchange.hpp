@@ -34,7 +34,7 @@ class BitcoinExchange {
 		string _dataBuffer;
 
 		multimap<string, string> _inputMap;
-		multimap<string, string> _dataMap;
+		multimap<string, float> _dataMap;
 };
 
 
