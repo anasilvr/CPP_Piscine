@@ -1,13 +1,6 @@
 /*
 TODO:
 
-[x] Create a program which outputs the value of a certain amount of bitcoin on
-a certain date.
-[x] Use a database in csv format which will represent bitcoin
-price over time.
-[x] The program will take as input a second database, storing
-the different prices/dates to evaluate.
-
 Your program must respect these rules:
     [x] The program name is btc.
     [x] Your program must take a file as argument.
