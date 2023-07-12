@@ -32,14 +32,35 @@ not exist in your DB then you must use the closest date contained in your DB [
 #include <sstream>
 #include "../include/BitcoinExchange.hpp"
 
+static void verifyFile(string f) {
+	std::ifstream file(f);
+	if (!file.fail()) {
+		file.seekg(0,std::ios::end);
+		size_t size = file.tellg();
+		if (!size) {
+			cout << "File [" << f << "] is empty.\nExiting..." << endl;
+			file.close();
+			exit(EXIT_FAILURE);
+		}	
+		cout << "File [" << f << "] is valid." << endl;
+		file.close();
+	}
+	else {
+		cerr << "Error opening [" << f << "]\nExiting..." << endl;
+		file.close();
+		exit(EXIT_FAILURE);
+	}
+}
+
 int main (int ac, char **av) {
 	if (ac == 2) {
+		verifyFile(av[1]);
+		verifyFile("data.csv");
+		cout << endl;
 		BitcoinExchange out (av[1]);
-
-		//prints;
 	}
 	else{
 		cerr << "Invalid number of arguments.\nUsage: \"./btc [reference_file.txt]\"" << endl;
-		return (-1);
+		return (EXIT_FAILURE);
 	}
 }
