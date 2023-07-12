@@ -13,65 +13,26 @@ BitcoinExchange::BitcoinExchange(const char *av) {
 		dataFile.close();
 	}
 	catch (std::fstream::failure e) {
-		cerr << "Error reading files\n";
+		cerr << RED "Error reading files\n" NC << endl;
 	}
 	parseData();
 	generateOutput(av);
 }
 
-// Copy constructor
-BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) {
-  *this = other;
-  return;
-}
+// // Copy constructor
+// BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) {
+//   *this = other;
+//   return;
+// }
 
-// Copy assignment overload
-BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &rhs) {
-  (void)rhs;
-  return *this;
-}
+// // Copy assignment overload
+// BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &rhs) {
+//   (void)rhs;
+//   return *this;
+// }
 
 // Default destructor
 BitcoinExchange::~BitcoinExchange() { return; }
-
-
-
-void BitcoinExchange::errMsg (string msg, string data)
-{
-        cerr << msg;
-        if (!data.empty())
-                cerr << data;
-        cerr << endl;
-}
-
-// void BitcoinExchange::parseInput() {
-// 	string buff;
-// 	string date;
-// 	string value;
-
-// 	size_t pos = 0;
-// 	size_t offset = 0;
-// 	size_t len = 0;
-
-// 	while ((pos = _inputBuffer.find('\n', offset)) != std::string::npos) {
-// 		len = pos - offset; // substring length
-// 		buff = _inputBuffer.substr(offset, len);
-
-// 		// Separate date and value
-// 		size_t delimiterPos = buff.find(" | ");
-// 		if (delimiterPos != string::npos) {
-// 			date = buff.substr(0, delimiterPos);
-// 			value = buff.substr(delimiterPos + 3);
-// 		}
-// 		else {
-// 			date = buff;
-// 			value = "";
-// 		}
-// 		_inputMap.insert(std::make_pair(date, value));
-// 		pos++; // Move to the next character after '\n'
-// 		offset = pos; // Update the offset
-// 	}
-// }
 
 void BitcoinExchange::parseData() {
 	string buff;
@@ -91,27 +52,38 @@ void BitcoinExchange::parseData() {
 		size_t delimiterPos = buff.find(",");
 		if (delimiterPos != string::npos) {
 			date = buff.substr(0, delimiterPos);
-			rate = stof(buff.substr(delimiterPos + 1));
+			if (!isDateValid(date)) {
+				cerr << RED "Error: Invalid date found on [data.csv]\nExiting..." NC << endl;
+				exit(EXIT_FAILURE);
+			}
+			try { rate = stof(buff.substr(delimiterPos + 1)); }
+			catch (std::exception e) {
+				cerr << RED "Error: Invalid rate found on [data.csv]\nExiting..." NC << endl;
+				exit(EXIT_FAILURE);
+			}
 		}
 		else {
 			date = buff;
 			rate = -1;
 		}
-		_dataMap.insert(std::make_pair(date, rate));
+		_dataMap.insert(std::make_pair(dateToInt(date), rate));
 		pos++; // Move to the next character after '\n'
 		offset = pos; // Update the offset
 	}
-	// _dataMap.erase(prev(_dataMap.end()));
-	// for(multimap<string, string>::iterator it = _dataMap.begin(); it != _dataMap.end(); ++it)
-	// cout << it->first << " | " << it->second << endl;
 }
 
-static bool isDateValid(const std::string& date) {
+bool BitcoinExchange::isDateValid(string date) const {
     std::tm timeStruct = { .tm_year = 0, .tm_mon = 0, .tm_mday = 0, .tm_hour = 0, .tm_min = 0, .tm_sec = 0 };
     std::istringstream iss(date);
     iss >> std::get_time(&timeStruct, "%Y-%m-%d");
     return (!iss.fail());
 }
+
+int BitcoinExchange::dateToInt(string date) const {
+	int ret = std::stoi(date.substr(0, 4) + date.substr(5, 2) + date.substr(8, 2));  
+	return (ret);
+}
+
 
 void BitcoinExchange::generateOutput(const char *av) const {
 	
@@ -139,15 +111,18 @@ void BitcoinExchange::generateOutput(const char *av) const {
 					cout << "Error: too large a number." << endl;
 			else if (std::stod(value) < 0)
 					cout << "Error: not a positive number." << endl;
-			else {
-				for (map<string, float>::const_iterator it = _dataMap.begin(); it != _dataMap.end(); ++it) {
-					if (it->first.compare(date) == 0)
+			else {				
+				for (map<int, float>::const_iterator it = --_dataMap.end(); it != _dataMap.begin(); --it) {
+					int inputDate = dateToInt(date);
+					if (it->first <= inputDate) {
 						cout << date << " => " << value << " = " << (stof(value) * it->second) << endl;
+						break ;
+					}
 				}
 			}
 		}
 		catch (const std::exception &e) {
-			cout << "Error: Invalid input." << endl;
-		}	
+			cerr << RED "Error: Invalid input." NC << endl;
+		}
 	}
 }

@@ -38,15 +38,15 @@ static void verifyFile(string f) {
 		file.seekg(0,std::ios::end);
 		size_t size = file.tellg();
 		if (!size) {
-			cout << "File [" << f << "] is empty.\nExiting..." << endl;
+			cerr << RED "File [" << f << "] is empty.\nExiting..." NC << endl;
 			file.close();
 			exit(EXIT_FAILURE);
 		}	
-		cout << "File [" << f << "] is valid." << endl;
+		cout << GRN "File [" << f << "] is valid." NC << endl;
 		file.close();
 	}
 	else {
-		cerr << "Error opening [" << f << "]\nExiting..." << endl;
+		cerr << RED "Error opening [" << f << "]\nExiting..." NC << endl;
 		file.close();
 		exit(EXIT_FAILURE);
 	}
@@ -60,7 +60,7 @@ int main (int ac, char **av) {
 		BitcoinExchange out (av[1]);
 	}
 	else{
-		cerr << "Invalid number of arguments.\nUsage: \"./btc [reference_file.txt]\"" << endl;
+		cerr << RED "Invalid number of arguments.\nUsage: \"./btc [reference_file.txt]\"" NC << endl;
 		return (EXIT_FAILURE);
 	}
 }

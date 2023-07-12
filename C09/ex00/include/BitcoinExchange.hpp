@@ -13,6 +13,10 @@ using std::cerr;
 using std::endl;
 using std::map;
 
+#define GRN "\e[0;32m"
+#define RED "\e[0;31m"
+#define NC "\e[0m"
+
 // Class declaration
 class BitcoinExchange {
 	public: 
@@ -24,17 +28,15 @@ class BitcoinExchange {
 		BitcoinExchange(const BitcoinExchange &other);
 		BitcoinExchange &operator=(const BitcoinExchange &rhs);
 
-	//	void	parseInput();
-		void	parseData();
-		void	compareData() const;
-		void	generateOutput(const char *av) const;
-		void	errMsg (string msg, string data);
+		void		parseData();
 
-		string _filename;
+		bool	isDateValid(string date) const;
+		int 	dateToInt(string date) const;
+		void	generateOutput(const char *av) const;
+
 		string _dataBuffer;
 
-	//	multimap<string, string> _inputMap;
-		map<string, float> _dataMap;
+		map<int, float> _dataMap;
 };
 
 
