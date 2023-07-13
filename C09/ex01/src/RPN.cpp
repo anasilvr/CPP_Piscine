@@ -143,14 +143,14 @@ void	RPN::calculate() {
 				ret.push(doMath(a, b, op));
 			}
 		}
-		else {
-			ret.push(ret.top());
-		}
-	// stack<int> stmp = ret;
-	// for (int i = 0; stmp.size() > 0; i++) {
-	// 	cout << i << " ret.top() = " << stmp.top() << endl;
-	// 	stmp.pop();
-	// }
+		// else {
+		// 	ret.push(ret.top());
+		// } i'm doing an extra push and falling into an infinite loop sometimes...
+	stack<int> stmp = ret;
+	for (int i = 0; stmp.size() > 0; i++) {
+		cout << i << " ret.top() = " << stmp.top() << endl;
+		stmp.pop();
+	}
 	}
 	cout << GRN << "\t" << ret.top() << NC << endl;
 }

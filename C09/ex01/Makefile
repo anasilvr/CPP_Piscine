@@ -69,13 +69,13 @@ test: all
 	@sleep 1
 
 	@echo "\n\033[32m\033[1mTest 3\033[0m"
-	./$(NAME) "8 9 * 9 - 9 - 9 - 4 - 1 +"
-	@echo "Answer: 42"
+	./$(NAME) "1 2 * 2 / 2 + 5 * 6 - 1 3 * - 4 5 * * 8 /"
+	@echo "Answer: 15"
 	@sleep 1
 
 	@echo "\n\033[32m\033[1mTest 4\033[0m"
-	./$(NAME) "1 2 * 2 / 2 + 5 * 6 - 1 3 * - 4 5 * * 8 /"
+	./$(NAME) "8 9 * 9 - 9 - 9 - 4 - 1 +"
+	@echo "Answer: 42"
 	@sleep 1
-	@echo "Answer: 15"
 	@echo "\n\033[32m\033[1mDONE!\033[0m"
 	@sleep 0.5
