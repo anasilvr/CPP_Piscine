@@ -145,7 +145,7 @@ void	RPN::calculate() {
 		}
 		// else {
 		// 	ret.push(ret.top());
-		// } i'm doing an extra push and falling into an infinite loop sometimes...
+		// } i'm sometimes doing an extra push and falling into an infinite loop...
 	stack<int> stmp = ret;
 	for (int i = 0; stmp.size() > 0; i++) {
 		cout << i << " ret.top() = " << stmp.top() << endl;
