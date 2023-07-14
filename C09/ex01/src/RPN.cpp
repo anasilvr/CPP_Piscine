@@ -4,6 +4,7 @@ RPN::RPN (const char *av) : _raw(av), _opCount(0), _nbCount(0) {
 	verifyInputContent();
 	verifyInputFormat();
 	calculate();
+	cout << "Result: " << _cstk.top() << NC << endl;
 }
 
 RPN::~RPN() {}
@@ -71,7 +72,6 @@ static float doMath(float a, float b, char operation) {
 			cout << RED "Error." NC << endl;
 			exit(EXIT_FAILURE);
 	}
-//	cout << "Leaving doMath(" <<  result << ")" << endl;
 	return (result);
 }
 
@@ -108,7 +108,6 @@ void	RPN::verifyInputFormat() {
 }
 
 static float parseNb(char c) {
-//	cout << "Starting parseNb() " << c << endl;
 	int value;
 	value = c - 48;
 	return (static_cast<float>(value));
@@ -130,5 +129,4 @@ void RPN::calculate() {
 		else if (isOperand(*it) == true)
 			_cstk.push(parseNb(*it));
 	}
-	cout << GRN "Result: " << _cstk.top() << NC << endl;
 }

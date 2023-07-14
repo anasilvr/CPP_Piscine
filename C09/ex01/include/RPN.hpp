@@ -29,7 +29,7 @@ class RPN {
 		RPN(const RPN &other);
 		RPN &operator=(const RPN &rhs);
 
-		void	verifyInputContent(const char *av);
+		void	verifyInputContent();
 		void	verifyInputFormat();
 		void	calculate();
 
@@ -37,5 +37,5 @@ class RPN {
 		size_t			_opCount;
 		size_t			_nbCount;
 		size_t			_iLen;
-		stack<float>		_cstk;
+		stack<float>	_cstk;
 };
