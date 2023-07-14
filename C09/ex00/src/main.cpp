@@ -19,10 +19,6 @@ not exist in your DB then you must use the closest date contained in your DB
 [x] Validate file permissions
 */
 
-#include <string>
-#include <iostream>
-#include <fstream>
-#include <sstream>
 #include "../include/BitcoinExchange.hpp"
 
 static void verifyFile(string f) {
@@ -35,7 +31,7 @@ static void verifyFile(string f) {
 			file.close();
 			exit(EXIT_FAILURE);
 		}	
-		cout << GRN "File [" << f << "] is valid." NC << endl;
+		cout << GRN "File [" << f << "] is valid" NC << endl;
 		file.close();
 	}
 	else {
@@ -51,9 +47,8 @@ int main (int ac, char **av) {
 		verifyFile("data.csv");
 		cout << endl;
 		BitcoinExchange out (av[1]);
+		return (EXIT_SUCCESS);
 	}
-	else{
-		cerr << RED "Invalid number of arguments.\nUsage: \"./btc [reference_file.txt]\"" NC << endl;
-		return (EXIT_FAILURE);
-	}
+	cerr << RED "Invalid number of arguments.\nUsage: \"./btc [reference_file.txt]\"" NC << endl;
+	return (EXIT_FAILURE);
 }

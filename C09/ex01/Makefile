@@ -76,6 +76,7 @@ test: all
 	@echo "\n\033[32m\033[1mTest 4\033[0m"
 	./$(NAME) "8 9 * 9 - 9 - 9 - 4 - 1 +"
 	@echo "Answer: 42"
+	
 	@sleep 1
 	@echo "\n\033[32m\033[1mDONE!\033[0m"
 	@sleep 0.5

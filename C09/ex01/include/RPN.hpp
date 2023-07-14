@@ -29,13 +29,13 @@ class RPN {
 		RPN(const RPN &other);
 		RPN &operator=(const RPN &rhs);
 
-		void	verifyInput(const char *av);
-		void	parseInput();
+		void	verifyInputContent(const char *av);
+		void	verifyInputFormat();
 		void	calculate();
 
 		string			_raw;
 		size_t			_opCount;
 		size_t			_nbCount;
 		size_t			_iLen;
-		stack<int>		_cstk;
+		stack<float>		_cstk;
 };
