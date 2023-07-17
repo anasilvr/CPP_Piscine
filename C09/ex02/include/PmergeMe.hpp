@@ -4,11 +4,16 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <vector>
+#include <list>
 
 using std::string;
 using std::cout;
 using std::cerr;
 using std::endl;
+using std::vector;
+using std::list;
+using std::stoi;
 
 #define GRN "\e[0;32m"
 #define RED "\e[0;31m"
@@ -16,11 +21,19 @@ using std::endl;
 
 class PmergeMe {
 	public:
-		PmergeMe();
+		PmergeMe(char **av);
 		~PmergeMe();
 
 	private:
-	//	PmergeMe();
+		PmergeMe();
 		PmergeMe(const PmergeMe &other);
 		PmergeMe &operator=(const PmergeMe &rhs);
+
+		void msortVector(int start, int end);
+		void msortList(int start, int end);
+		void mergeVectors(int start, int mid, int end);
+		void mergeLists(int start, int mid);
+
+		vector<int>	_vectCont;
+		list<int>	_listCont;
 };

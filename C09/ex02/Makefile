@@ -56,22 +56,3 @@ fclean: clean
 
 # Removes objects and executables and remakes
 re: fclean all
-
-test: all
-	@echo "\033[32m\033[1mTest 1\033[0m"
-#	ARG=`jot -r 3000 1 100000 | tr '\n' ' '` ; ./$(NAME) $ARG
-	@sleep 1
-
-	@echo "\n\033[32m\033[1mTest 2\033[0m"
-#	ARG=`jot -r 5000 1 100000 | tr '\n' ' '` ; ./$(NAME) $ARG
-	@sleep 1
-
-	@echo "\n\033[32m\033[1mTest 3\033[0m"
-#	ARG=`jot -r 7000 1 100000 | tr '\n' ' '` ; ./$(NAME) $ARG
-	@sleep 1
-
-	@echo "\n\033[32m\033[1mTest 4\033[0m"
-#	ARG=`jot -r 10000 1 100000 | tr '\n' ' '` ; ./$(NAME) $ARG
-	@sleep 1
-	@echo "\n\033[32m\033[1mDONE!\033[0m"
-	@sleep 0.5

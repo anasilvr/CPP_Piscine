@@ -50,8 +50,12 @@ Error
 #include "../include/PmergeMe.hpp"
 
 int main(int ac, char **av) {
-	if (ac == 1)
-		cout << "caca" << endl;
-	else
-		cout << av[0] << endl;
+	if (ac > 1){
+		av[ac] = NULL;
+		av++;
+		PmergeMe data(av);
+		return (EXIT_SUCCESS);
+	}
+	cerr << RED "Invalid number of arguments.\nUsage: ./PMergeMe [positive integers sequence]" NC << endl;
+	return (EXIT_FAILURE);
 }
