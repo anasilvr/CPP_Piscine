@@ -83,6 +83,10 @@ void	RPN::verifyInputFormat() {
 		if (isOperator(token[0])) {
 			if (token.length() == 1)
 				_opCount++;
+			else if (std::stoi(token)) {
+				cout << RED "Error: Invalid operand found (Limits: 0 - 9)" NC << endl;
+				exit (EXIT_FAILURE);
+			}
 			else {
 				cout << RED "Error: Invalid operator found (Available operators : + - / *)" NC << endl;
 				exit(EXIT_FAILURE);

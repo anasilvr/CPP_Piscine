@@ -7,6 +7,10 @@
 #include <vector>
 #include <list>
 
+#include <sys/time.h>
+#include <stdio.h>
+#include <time.h>
+
 using std::string;
 using std::cout;
 using std::cerr;
@@ -32,8 +36,10 @@ class PmergeMe {
 		void msortVector(int start, int end);
 		void msortList(int start, int end);
 		void mergeVectors(int start, int mid, int end);
-		void mergeLists(int start, int mid);
+		void mergeLists(int start, int mid, int end);
 
 		vector<int>	_vectCont;
 		list<int>	_listCont;
+
+		
 };
