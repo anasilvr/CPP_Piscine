@@ -33,6 +33,7 @@ class PmergeMe {
 		PmergeMe(const PmergeMe &other);
 		PmergeMe &operator=(const PmergeMe &rhs);
 
+		void parseArgs(char **av, vector<int> &_vec, list<int> &_list);
 		void msortVector(int start, int end);
 		void msortList(int start, int end);
 		void mergeVectors(int start, int mid, int end);

@@ -1,17 +1,17 @@
 #include "../include/PmergeMe.hpp"
 
-PmergeMe::PmergeMe (char **av) {
-	int i;
+static unsigned long long time_in_ms(struct timeval t) {
+	return (static_cast<unsigned long long>(t.tv_sec) * 1000000 + t.tv_usec);
+}
 
-	// timeval t0, t1;
-	// gettimeofday(&t0, NULL);
-
+void PmergeMe::parseArgs(char **av, vector<int> &_vec, list<int> &_list) {
 	while (*av) {
+		int i;
 		try {
 			i = stoi(*av);
 			if (i >= 0) {
-					_vectCont.push_back(i);
-					_listCont.push_back(i);
+					_vec.push_back(i);
+					_list.push_back(i);
 			}
 			else {
 				cerr << "Error: invalid input [negative number]" << endl;
@@ -24,13 +24,25 @@ PmergeMe::PmergeMe (char **av) {
 		}
 	av++;
 	}
-	// gettimeofday(&t0, NULL);
+}
+
+PmergeMe::PmergeMe (char **av) {
+	timeval t0, t1;
+	
+	gettimeofday(&t0, NULL);
+	parseArgs(av, _vectCont, _listCont);
+	gettimeofday(&t1, NULL);
 
 	cout << "Before: ";
 	for (vector<int>::iterator it = _vectCont.begin(); it != _vectCont.end(); ++it){
 		cout << *it << " ";
 	}
 	
+	// cout << "\n[L] Before: ";
+	// for (list<int>::iterator it = _listCont.begin(); it != _listCont.end(); ++it){
+	// 	cout << *it << " ";
+	// }
+
 	timeval tVStart, tVEnd;
 	gettimeofday(&tVStart, NULL);
 	msortVector(0, _vectCont.size() - 1);
@@ -41,29 +53,25 @@ PmergeMe::PmergeMe (char **av) {
 	msortList(0, _listCont.size() - 1);
 	gettimeofday(&tLEnd, NULL);
 
-	cout << "\nAfter: ";
-	for (list<int>::iterator it = _listCont.begin(); it != _listCont.end(); ++it){
+	cout << "\n\nAfter: ";
+	for (vector<int>::iterator it = _vectCont.begin(); it != _vectCont.end(); ++it){
 		cout << *it << " ";
 	}
+	// cout << "\n[L] After: ";
+	// for (list<int>::iterator it = _listCont.begin(); it != _listCont.end(); ++it){
+	// 	cout << *it << " ";
+	// }
+	cout << endl;
 
-	// unsigned long long t0_us = static_cast<unsigned long long>(t0.tv_sec) * 1000000 + t0.tv_usec;
-	// unsigned long long t1_us = static_cast<unsigned long long>(t1.tv_sec) * 1000000 + t1.tv_usec;
-	// unsigned long long tDataProcess = static_cast<unsigned long long>(t1_us + t0_us) / 2;
-
-	unsigned long long tVStart_us = static_cast<unsigned long long>(tVStart.tv_sec) * 1000000 + tVStart.tv_usec;
-	unsigned long long tVEnd_us = static_cast<unsigned long long>(tVEnd.tv_sec) * 1000000 + tVEnd.tv_usec;
-	unsigned long long tVProcess = (tVEnd_us - tVStart_us);
-	unsigned long long tLStart_us = static_cast<unsigned long long>(tLStart.tv_sec) * 1000000 + tLStart.tv_usec;
-	unsigned long long tLEnd_us = static_cast<unsigned long long>(tLEnd.tv_sec) * 1000000 + tLEnd.tv_usec;
-	unsigned long long tLProcess = (tLEnd_us - tLStart_us);
+	unsigned long long tDataProcess = (time_in_ms(t1) - time_in_ms(t0)) / 2;
+	unsigned long long tVProcess = (time_in_ms(tVEnd) - time_in_ms(tVStart)) + tDataProcess;
+	unsigned long long tLProcess = (time_in_ms(tLEnd) - time_in_ms(tLStart)) + tDataProcess;
 
 	cout << "\nTime to process a range of " << _vectCont.size() << " elements with std::vector:\t" << tVProcess << " us" << endl;
 	cout << "Time to process a range of " << _listCont.size() << " elements with std::list:\t" << tLProcess << " us" << endl;
-	cout << endl;
 }
 
 /*------------------------------ VECTOR SORT ------------------------------*/
-
 void PmergeMe::mergeVectors(int start, int mid, int end) {
 	vector<int> tmp;
 
@@ -101,17 +109,14 @@ void PmergeMe::msortVector(int start, int end) {
 	if (start < end) {
 		int mid = ((start + end) / 2);
 
-		//sort each half
 		msortVector(start, mid);
 		msortVector((mid + 1), end);
 
-		//merge sorted halves
 		mergeVectors(start, mid, end);
 	}
 }
 
 /*------------------------------ LIST SORT ------------------------------*/
-
 void PmergeMe::mergeLists(int start, int mid, int end) {
 	list<int> tmp;
 
@@ -138,13 +143,13 @@ void PmergeMe::mergeLists(int start, int mid, int end) {
         }
     }
 	//if there's something left in the first half, push it to tmp
-    while (leftIt != _listCont.end()) {
+    while (leftIdx <= mid) {
         tmp.push_back(*leftIt);
         leftIt++;
 		leftIdx++;
     }
 	//if there's something left in the second half, push it to tmp
-    while (rightIt != _listCont.end()) {
+    while (rightIdx <= end) {
         tmp.push_back(*rightIt);
         rightIt++;
 		rightIdx++;
@@ -158,7 +163,7 @@ void PmergeMe::mergeLists(int start, int mid, int end) {
         *listIt = *tmpIt;
         tmpIt++;
         listIt++;
-		start++;
+		++start;
 	}
 }
 
@@ -166,10 +171,10 @@ void PmergeMe::msortList(int start, int end) {
 	if (start < end) {
 		int mid = (start + end) / 2;
 
-	msortList(start, mid);
-	msortList(mid + 1, end);
+		msortList(start, mid);
+		msortList(mid + 1, end);
 
-	mergeLists(start, mid, end);
+		mergeLists(start, mid, end);
 	}
 }
 
