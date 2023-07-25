@@ -105,7 +105,7 @@ void	RPN::verifyInputFormat() {
 			exit (EXIT_FAILURE);
 		}
 	}
-	if (((_opCount + _nbCount) % 2) == 0 || _nbCount < _opCount) { 
+	if (((_opCount + _nbCount) % 2) == 0 || _nbCount < _opCount || _opCount == 0) { 
 		cout << RED "Error: Invalid line" NC << endl;
 		exit (EXIT_FAILURE);
 	}
@@ -124,8 +124,16 @@ void RPN::calculate() {
 
 	for (it = _raw.begin(); it != _raw.end(); it++) {
 		if (isOperator(*it) == true) {
+			if (_cstk.empty()) {
+				cout << RED "Error: Invalid line" NC << endl;
+				exit (EXIT_FAILURE);
+			}
 			a = _cstk.top();
 			_cstk.pop();
+			if (_cstk.empty()) {
+				cout << RED "Error: Invalid line" NC << endl;
+				exit (EXIT_FAILURE);
+			}
 			b = _cstk.top();
 			_cstk.pop();
 			_cstk.push(doMath(a, b, *it));
